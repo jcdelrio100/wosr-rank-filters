@@ -2,8 +2,7 @@
 
 **Tiny, robust rank-order filters that compete with neural networks.**
 
-<!-- After the first Zenodo release, replace XXXXXXX with the concept DOI number -->
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.SWDOI.svg)](https://doi.org/10.5281/zenodo.SWDOI)
 
 Rank-order filters (median, erosion, dilation, weighted medians) need no multiplications, tolerate a known number of
 corrupted samples and are 1-Lipschitz, but they are hard to train because selecting "the k-th largest value" has zero
@@ -98,7 +97,9 @@ bank = WOSBank(C=4, stages=2, dim=1, k=7, anneal=2100)   # banks: ramp annealed 
 See `CITATION.cff`, or:
 
 > J. C. del Río, *Train with Ramps, Deploy with Ranks: Tiny, robust rank-order filters that compete with neural
-> networks*, preprint, Zenodo, 2026. doi:10.5281/zenodo.XXXXXXX
+> networks*, preprint, Zenodo, 2026. doi:10.5281/zenodo.PPDOI
+>
+> Code and results: doi:10.5281/zenodo.SWDOI
 
 ## Licence
 

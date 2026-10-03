@@ -11,6 +11,18 @@ version: "1.0.0"
 date-released: "2026-10-03"
 license: MIT
 repository-code: "https://github.com/GITHUB_USER/wosr-rank-filters"
+doi: "10.5281/zenodo.SWDOI"
+preferred-citation:
+  type: article
+  title: "Train with Ramps, Deploy with Ranks: Tiny, robust rank-order filters that compete with neural networks"
+  authors:
+    - family-names: "del Río"
+      given-names: "Juan Carlos"
+  year: 2026
+  publisher:
+    name: "Zenodo"
+  doi: "10.5281/zenodo.PPDOI"
+  notes: "Preprint"
 keywords:
   - rank-order filters
   - weighted order statistics

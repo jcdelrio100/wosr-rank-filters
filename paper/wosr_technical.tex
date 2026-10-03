@@ -23,10 +23,14 @@
 
 \title{Train with Ramps, Deploy with Ranks:\\
 Learnable Weighted Order Statistic Cascades as Tiny, Robust,\\ Multiplication-Free Alternatives to Neural Networks}
-\author{Juan Carlos del R{\'\i}o\thanks{Independent researcher, Madrid, Spain. \texttt{jcdelrio100@gmail.com}}}
+\author{Juan Carlos del R{\'\i}o\thanks{Independent researcher, Madrid, Spain. \texttt{jcdelrio100@gmail.com}. Preprint DOI: \href{https://doi.org/\ppdoi}{\ppdoi}.}}
 \date{October 2026 \quad (preprint)}
 
 \let\svthefootnote\thefootnote
+% --- identifiers: filled in by tools/set_ids.sh before the final upload ---
+\newcommand{\ghrepo}{\url{https://github.com/GITHUB_USER/wosr-rank-filters}}
+\newcommand{\swdoi}{10.5281/zenodo.SWDOI}
+\newcommand{\ppdoi}{10.5281/zenodo.PPDOI}
 \begin{document}
 \maketitle
 
@@ -220,7 +224,7 @@ $\beta=1$ (banks: $\beta$ annealed $1\to0$ over the first 70\,\% of the steps, R
 $\beta=0$; baselines use Adam ($\eta=10^{-3}$ or $2\cdot10^{-3}$) with the same data, loss
 (mean squared error, MSE) and number of steps. ``Mults'' counts multiply--accumulates per output sample (attention included),
 ``Comps'' counts comparisons for sorting (bound $m\lceil\log_2m\rceil$ per stage), and latency is single-threaded CPU
-time. Exact configurations are listed in Appendix~\ref{app:hyper}; the code and all result files are released with the paper.
+time. Exact configurations are listed in Appendix~\ref{app:hyper}; the code and all result files are available at \ghrepo{} (archived at \href{https://doi.org/\swdoi}{doi:\swdoi}).
 
 %=====================================================================================================
 \section{Results}\label{sec:results}

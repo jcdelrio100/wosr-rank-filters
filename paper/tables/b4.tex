@@ -1,0 +1,11 @@
+\begin{table}[t]\centering\small
+\caption{B4: constant-false-alarm-rate (CFAR) detection in K-distributed clutter with range-correlated texture (AR(1) coefficient $\rho$), false-alarm probability $P_{fa}=10^{-4}$ calibrated per detector. Signal-to-noise ratio (SNR, dB) for detection probability $P_d=0.5$ with 0/2/4/8 interfering targets in the reference window (lower is better); learned detectors: mean of 2 seeds, trained with the same Neyman--Pearson objective.}\label{tab:b4}
+\setlength{\tabcolsep}{4pt}\begin{tabular}{lr|cccc|cccc}\toprule
+& & \multicolumn{4}{c|}{$\rho=0$} & \multicolumn{4}{c}{$\rho=0.9$}\\
+Detector & Params & 0 & 2 & 4 & 8 & 0 & 2 & 4 & 8\\\midrule
+OS-CFAR ($k{=}24$) & 0 & 15.46 & 16.41 & 17.33 & 19.91 & 14.43 & 15.30 & 16.27 & 18.75\\
+GO-OS ($k{=}11$) & 0 & 15.76 & 16.63 & 17.50 & 20.09 & 14.91 & 15.72 & 16.50 & 18.85\\
+WOS-R (32 repetitions) & 34 & 15.55 & \textbf{16.29} & \textbf{16.95} & \textbf{18.38} & 14.20 & \textbf{14.83} & \textbf{15.53} & \textbf{17.09}\\
+MLP (log-equivariant) & 6\,337 & \textbf{15.22} & 17.64 & 19.37 & 22.69 & \textbf{13.86} & 15.92 & 17.57 & 20.35\\
+Transformer (log-equivariant) & 5\,009 & 15.55 & $>30$ & $>30$ & $>30$ & 14.85 & $>30$ & $>30$ & $>30$\\
+\bottomrule\end{tabular}\end{table}

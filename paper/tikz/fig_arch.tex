@@ -1,0 +1,31 @@
+% Fig. 5 -- cascade (series) vs bank (parallel) of WOS-R stages
+\begin{tikzpicture}[
+  st/.style={draw, rounded corners, fill=blue!12, draw=blue!60!black, minimum width=17mm, minimum height=7mm, font=\small, align=center},
+  lab/.style={font=\footnotesize, align=center},
+  arr/.style={-{Latex[length=2mm]}, thick}]
+  % ---------------- cascade
+  \node[lab, anchor=west] at (-0.6,1.0) {\textbf{(a) Cascade} (stages in series): \emph{no multiplications}};
+  \node (xin) at (-0.3,0) {$x$};
+  \node[st] (c1) at (1.6,0) {WOS stage 1\\[-1pt]\scriptsize $(w^{(1)},r^{(1)})$};
+  \node[st] (c2) at (4.3,0) {WOS stage 2\\[-1pt]\scriptsize $(w^{(2)},r^{(2)})$};
+  \node (yout) at (6.3,0) {$y$};
+  \draw[arr] (xin) -- (c1); \draw[arr] (c1) -- (c2); \draw[arr] (c2) -- (yout);
+  \node[lab, text width=6.0cm, align=left, anchor=west] at (7.0,0) {e.g.\ erosion$\to$dilation = \emph{opening}; median of medians.\\
+     Output is always one of the input samples. 7-tap, 2 stages: 16 parameters.};
+  % ---------------- bank
+  \node[lab, anchor=west] at (-0.6,-1.2) {\textbf{(b) Bank} (chains in parallel + weighted sum): \emph{$C$ multiplications}};
+  \node (xb) at (-0.3,-3.05) {$x$};
+  \foreach \c/\yy in {1/-1.95,2/-2.75,C/-4.15}{
+    \node[st, minimum width=14mm] (b1\c) at (1.6,\yy) {\scriptsize stage 1};
+    \node[st, minimum width=14mm] (b2\c) at (3.6,\yy) {\scriptsize stage 2};
+    \draw[arr] (xb) -- (b1\c.west); \draw[arr] (b1\c) -- (b2\c);
+    \node[draw, circle, inner sep=1pt, minimum size=6mm, font=\scriptsize, fill=green!15, draw=green!50!black] (a\c) at (5.2,\yy) {$\times a_{\c}$};
+    \draw[arr] (b2\c) -- (a\c);}
+  \node at (2.6,-3.4) {$\vdots$};
+  \node[draw, circle, thick, minimum size=8mm] (S) at (6.6,-3.05) {$\Sigma$};
+  \foreach \c in {1,2,C}{\draw[arr] (a\c) -- (S);}
+  \draw[arr] (S) -- ++(1.0,0) node[right]{$y$};
+  \node[lab] at (6.6,-2.4) {$+b$};
+  \node[lab, text width=6.0cm, align=left, anchor=west] at (8.9,-3.05) {Each chain is a small cascade; the weighted sum can mix opposite operators
+     (e.g.\ identity $-$ opening = top-hat) and can average.\\ $C{=}4$: 69 parameters, 4 multiplications per sample.};
+\end{tikzpicture}

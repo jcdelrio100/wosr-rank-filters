@@ -1,0 +1,22 @@
+\begin{table*}[t]\centering\small
+\caption{B3: blind impulse denoising on BSD68, peak signal-to-noise ratio (PSNR, dB; higher is better) / structural similarity (SSIM). Training: salt-and-pepper (SP) with density $\sim U[0.1,0.6]$. Out of distribution (OOD): SP 70\,\%, random-valued impulse noise (RVIN). AMF: adaptive median filter; switching: WOS-R applied only to pixels that are an extreme of their $3{\times}3$ window. Mults and comparisons per pixel; latency in ms for a $512{\times}512$ image (1 CPU thread). Best per column in bold.}\label{tab:b3bsd68}
+\resizebox{\textwidth}{!}{\begin{tabular}{lrrrr|cccc|cc}\toprule
+Model & Params & Mults & Comps & ms & SP 10\% & SP 30\% & SP 50\% & SP 70\% & RVIN 20\% & RVIN 40\%\\\midrule
+Median $3{\times}3$ & 0 & 0 & 36 & 52 & 28.26/0.851 & 21.94/0.682 & 14.62/0.268 & 9.58/0.069 & \textbf{26.70}/0.802 & 21.62/0.552\\
+Median $5{\times}5$ & 0 & 0 & 125 & 149 & 25.79/0.731 & 24.90/0.711 & 21.49/0.617 & 13.48/0.226 & 25.36/0.718 & 23.59/0.637\\
+Adaptive median (AMF, 7) & 0 & 0 & var. & 386 & 32.29/0.944 & 29.07/0.909 & 26.02/0.839 & 20.06/0.647 & 21.05/0.524 & 16.07/0.260\\
+WOS-R $3{\times}3$, 2 stages & 20 & 0 & 72 & 178 & 27.37/0.812 & 25.50/0.774 & 19.25/0.562 & 11.90/0.154 & 26.63/0.793 & 23.73/0.668\\
+WOS-R $5{\times}5$, 2 stages & 52 & 0 & 250 & 722 & 26.65/0.771 & 25.83/0.751 & 23.77/0.705 & 15.83/0.422 & 26.19/0.757 & \textbf{24.46}/0.696\\
+WOS-R bank $C{=}4$ ($3{\times}3$) & 85 & 4 & 288 & 489 & 26.46/0.785 & 25.41/0.755 & 20.47/0.535 & 13.37/0.162 & 25.78/0.770 & 23.38/0.661\\
+WOS-R bank $C{=}4$ ($5{\times}5$) & 213 & 4 & 1\,000 & 2806 & 26.60/0.770 & 25.89/0.752 & 24.11/0.699 & 16.85/0.372 & 26.07/0.756 & 24.37/0.696\\
+\quad ablation: bank $C{=}4$ ($3{\times}3$), ramp only & 85 & 4 & 288 & 489 & 26.98/0.801 & 25.62/0.766 & 20.22/0.532 & 13.11/0.157 & 26.22/0.784 & 23.55/0.667\\
+\quad ablation: bank $C{=}4$ ($5{\times}5$), ramp only & 213 & 4 & 1\,000 & 2806 & 26.74/0.776 & 25.98/0.757 & 24.08/0.704 & 16.55/0.369 & 26.20/0.762 & 24.43/0.700\\
+Switching WOS-R $3{\times}3$ & 20 & 0 & 90 & 240 & 31.18/0.933 & 27.88/0.894 & 20.19/0.657 & 12.53/0.197 & 20.98/0.513 & 16.17/0.257\\
+Switching WOS-R $5{\times}5$ & 52 & 0 & 268 & 666 & 30.52/0.923 & 28.88/0.902 & 26.22/0.840 & 18.48/0.604 & 20.89/0.505 & 16.19/0.253\\
+Switching WOS-R bank $C{=}4$ ($3{\times}3$) & 85 & 4 & 306 & 726 & 29.78/0.885 & 27.76/0.843 & 21.87/0.602 & 14.82/0.218 & 20.82/0.501 & 16.11/0.253\\
+MLP $5{\times}5$ & 5\,889 & 5\,760 & 0 & 129 & 30.09/0.892 & 24.37/0.642 & 19.42/0.384 & 15.44/0.200 & 21.87/0.513 & 17.98/0.317\\
+DnCNN-S (6 layers, 16 ch) & 9\,585 & 9\,504 & 0 & 44 & 29.27/0.868 & 26.36/0.734 & 23.64/0.578 & 19.94/0.375 & 23.66/0.628 & 19.43/0.424\\
+DnCNN-M (10 layers, 32 ch) & 74\,593 & 74\,304 & 0 & 616 & \textbf{33.65}/0.950 & \textbf{29.97}/0.881 & \textbf{26.74}/0.761 & \textbf{21.92}/0.521 & 22.08/0.530 & 17.74/0.336\\
+DnCNN-17 (BN, 64 ch) & 556\,097 & 554\,112 & 0 & 3065 & 31.41/0.911 & 29.21/0.835 & 26.20/0.713 & 21.74/0.502 & 20.96/0.463 & 16.45/0.280\\
+Window Transformer & 17\,697 & 25\,152 & 0 & 1247 & 30.37/0.915 & 28.01/0.834 & 24.92/0.681 & 20.17/0.437 & 20.28/0.447 & 16.80/0.291\\
+\bottomrule\end{tabular}}\end{table*}

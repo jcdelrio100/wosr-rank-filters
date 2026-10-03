@@ -1,0 +1,702 @@
+[
+ {
+  "target": "E1 max\u2192min",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.13976573944091797,
+  "floor": -33.090362548828125
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.25493383407592773,
+  "floor": -32.91611671447754
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 27.799143195152283,
+  "floor": -33.090362548828125
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 27.60086417198181,
+  "floor": -32.91611671447754
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.01748800277709961,
+  "floor": -36.50590896606445
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.06900548934936523,
+  "floor": -36.41402006149292
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 21.641048192977905,
+  "floor": -36.41402006149292
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 21.82298183441162,
+  "floor": -36.50590896606445
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 0.06900548934936523,
+  "floor": -36.41402006149292
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 0.01748800277709961,
+  "floor": -36.50590896606445
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.8819103240966797,
+  "floor": -35.741446018218994
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.9282994270324707,
+  "floor": -35.852792263031006
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 31.027565002441406,
+  "floor": -35.852792263031006
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 30.91221272945404,
+  "floor": -35.741446018218994
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.2118396759033203,
+  "floor": -29.811265468597412
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.2533245086669922,
+  "floor": -29.78461742401123
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 23.759081959724426,
+  "floor": -29.78461742401123
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 23.92272174358368,
+  "floor": -29.811265468597412
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 0.2533245086669922,
+  "floor": -29.78461742401123
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 0.2118396759033203,
+  "floor": -29.811265468597412
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.9473109245300293,
+  "floor": -35.79638719558716
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.7909822463989258,
+  "floor": -35.89225769042969
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 30.413554310798645,
+  "floor": -35.79638719558716
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 30.493810176849365,
+  "floor": -35.89225769042969
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.24576663970947266,
+  "floor": -37.56635665893555
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.17584562301635742,
+  "floor": -37.63589382171631
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 24.398986101150513,
+  "floor": -37.56635665893555
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 24.473623037338257,
+  "floor": -37.63589382171631
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 0.24576663970947266,
+  "floor": -37.56635665893555
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 0.17584562301635742,
+  "floor": -37.63589382171631
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.24899721145629883,
+  "floor": -31.238608360290527
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.05017280578613281,
+  "floor": -31.44223690032959
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 29.30694282054901,
+  "floor": -31.44223690032959
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 28.730411529541016,
+  "floor": -31.238608360290527
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.06063222885131836,
+  "floor": -34.43312168121338
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.006577968597412109,
+  "floor": -34.55944299697876
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 24.45069432258606,
+  "floor": -34.43312168121338
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 24.688433408737183,
+  "floor": -34.55944299697876
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 0.06063222885131836,
+  "floor": -34.43312168121338
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 0.006577968597412109,
+  "floor": -34.55944299697876
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 1,
+  "gap": 23.601110577583313,
+  "floor": -30.5816912651062
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 0,
+  "gap": 23.247634172439575,
+  "floor": -30.334086418151855
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 25.59374690055847,
+  "floor": -30.334086418151855
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 26.412007212638855,
+  "floor": -30.5816912651062
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 17.69954562187195,
+  "floor": -34.49509859085083
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 17.34115958213806,
+  "floor": -34.38798666000366
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 20.911024808883667,
+  "floor": -34.38798666000366
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 21.216800212860107,
+  "floor": -34.49509859085083
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 17.34115958213806,
+  "floor": -34.38798666000366
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 17.69954562187195,
+  "floor": -34.49509859085083
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.1808929443359375,
+  "floor": -31.71553611755371
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.2515268325805664,
+  "floor": -31.92296028137207
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 26.193153262138367,
+  "floor": -31.71553611755371
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 26.40681743621826,
+  "floor": -31.92296028137207
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.0357818603515625,
+  "floor": -32.17693567276001
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.058574676513671875,
+  "floor": -32.261619567871094
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 19.567697048187256,
+  "floor": -32.17693567276001
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 19.704984426498413,
+  "floor": -32.261619567871094
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 0.0357818603515625,
+  "floor": -32.17693567276001
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 0.058574676513671875,
+  "floor": -32.261619567871094
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 0,
+  "gap": 22.20370888710022,
+  "floor": -33.45743179321289
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 1,
+  "gap": 22.608190774917603,
+  "floor": -33.66023778915405
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 25.971164107322693,
+  "floor": -33.45743179321289
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 26.23440444469452,
+  "floor": -33.66023778915405
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 16.30069613456726,
+  "floor": -30.83998203277588
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 16.685606241226196,
+  "floor": -30.86864709854126
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 16.590675115585327,
+  "floor": -30.83998203277588
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 19.161871671676636,
+  "floor": -30.86864709854126
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 16.30069613456726,
+  "floor": -30.83998203277588
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 16.685606241226196,
+  "floor": -30.86864709854126
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.0940394401550293,
+  "floor": -30.14096975326538
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.2097606658935547,
+  "floor": -30.414388179779053
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 26.568222045898438,
+  "floor": -30.14096975326538
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 26.549786031246185,
+  "floor": -30.414388179779053
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.03245830535888672,
+  "floor": -34.655938148498535
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.04171133041381836,
+  "floor": -34.85753059387207
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 20.62592625617981,
+  "floor": -34.655938148498535
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 20.593518018722534,
+  "floor": -34.85753059387207
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 0.03245830535888672,
+  "floor": -34.655938148498535
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 0.04171133041381836,
+  "floor": -34.85753059387207
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 0,
+  "gap": 14.659724235534668,
+  "floor": -37.57862091064453
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 1,
+  "gap": 14.33500051498413,
+  "floor": -37.711355686187744
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 22.411985397338867,
+  "floor": -37.57862091064453
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 22.503223419189453,
+  "floor": -37.711355686187744
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 9.052824974060059,
+  "floor": -38.71448040008545
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 8.769173622131348,
+  "floor": -38.83349418640137
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 16.57715082168579,
+  "floor": -38.83349418640137
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 16.482136249542236,
+  "floor": -38.71448040008545
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 9.052824974060059,
+  "floor": -38.71448040008545
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 8.769173622131348,
+  "floor": -38.83349418640137
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 0,
+  "gap": 20.665539503097534,
+  "floor": -35.7927942276001
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "signed \u00b7 aditiva",
+  "seed": 1,
+  "gap": 22.817349433898926,
+  "floor": -35.90556859970093
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 24.41200613975525,
+  "floor": -35.7927942276001
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "signed \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 24.460700750350952,
+  "floor": -35.90556859970093
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 14.769220352172852,
+  "floor": -28.107473850250244
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 16.906461715698242,
+  "floor": -27.95177698135376
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 18.425719141960144,
+  "floor": -28.107473850250244
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 18.258086442947388,
+  "floor": -27.95177698135376
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 14.769220352172852,
+  "floor": -28.107473850250244
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 16.906461715698242,
+  "floor": -27.95177698135376
+ }
+]

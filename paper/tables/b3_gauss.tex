@@ -1,0 +1,11 @@
+\begin{table}[t]\centering\small
+\caption{B3 coverage check: Gaussian denoising (trained at $\sigma=25$), PSNR in dB, Set12 / BSD68. Order statistics are not the right tool here (Prop.~\ref{prop:lip}: no averaging).}\label{tab:b3g}
+\begin{tabular}{lrcc}\toprule Model & Params & $\sigma=25$ & $\sigma=50$ (OOD)\\\midrule
+Median $3{\times}3$ & 0 & 25.45 / 24.89 & 21.06 / 20.92\\
+WOS-R bank $C{=}4$ ($3{\times}3$) & 85 & 26.64 / 26.15 & 21.95 / 21.84\\
+WOS-R bank $C{=}4$ ($5{\times}5$) & 213 & 27.00 / 26.45 & 22.56 / 22.42\\
+MLP $5{\times}5$ & 5\,889 & 28.19 / 27.59 & 19.88 / 20.00\\
+DnCNN-S (6 layers, 16 ch) & 9\,585 & 29.00 / 28.24 & 18.64 / 18.79\\
+DnCNN-M (10 layers, 32 ch) & 74\,593 & 29.36 / 28.51 & 17.62 / 17.81\\
+Window Transformer & 17\,697 & 28.15 / 27.58 & 20.04 / 20.08\\
+\bottomrule\end{tabular}\end{table}

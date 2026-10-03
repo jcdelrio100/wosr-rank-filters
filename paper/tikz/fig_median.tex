@@ -1,0 +1,24 @@
+% Fig. 1 -- what a rank (order-statistic) filter does
+\begin{tikzpicture}[
+  cell/.style={draw, minimum width=8mm, minimum height=6mm, font=\small},
+  bad/.style={cell, fill=red!18, draw=red!70!black},
+  pick/.style={cell, fill=blue!15, draw=blue!60!black, very thick},
+  lab/.style={font=\footnotesize, align=center},
+  arr/.style={-{Latex[length=2mm]}, thick}]
+  % input window
+  \node[lab] at (-1.3,0) {window\\around $x_i$};
+  \foreach \v [count=\k] in {2.1,2.3,9.0,2.2,2.4}{
+    \ifnum\k=3 \node[bad] (a\k) at (\k*0.85,0) {\v};
+    \else      \node[cell] (a\k) at (\k*0.85,0) {\v};\fi}
+  \node[lab, red!70!black] at (2.55,0.65) {impulse};
+  % sort
+  \draw[arr] (5.0,0) -- node[above, lab]{sort} (6.1,0);
+  \foreach \v [count=\k] in {2.1,2.2,2.3,2.4,9.0}{
+    \ifnum\k=3 \node[pick] (s\k) at (6.2+\k*0.85,0) {\v};
+    \else\ifnum\k=5 \node[bad] (s\k) at (6.2+\k*0.85,0) {\v};
+    \else \node[cell] (s\k) at (6.2+\k*0.85,0) {\v};\fi\fi}
+  \node[lab] at (8.75,-0.75) {position $1 \;\cdots\; m$\quad (rank)};
+  % select
+  \draw[arr] (s3.north) -- ++(0,0.75) node[above, lab]{output $y_i = 2.3$ (median: rank 3 of 5)};
+  \node[lab, text width=4.9cm, anchor=west] at (11.0,0) {rank 1 = minimum (erosion)\\rank $m$ = maximum (dilation)\\middle rank = median};
+\end{tikzpicture}

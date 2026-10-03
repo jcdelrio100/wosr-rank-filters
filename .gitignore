@@ -1,0 +1,19 @@
+# datasets (downloaded by code/data/get_data.py)
+code/data/img/
+code/data/fmnist/
+# checkpoints and logs
+*.pt
+*.npz
+*.npy
+*.log
+*.done
+__pycache__/
+.venv/
+# LaTeX build files (PDFs are versioned)
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz

@@ -1,0 +1,26 @@
+% Fig. 2 -- the 1993 NEst stage: offsets on positions, weights on ranks
+\begin{tikzpicture}[
+  cell/.style={draw, minimum width=9mm, minimum height=6mm, font=\small},
+  par/.style={draw, circle, inner sep=1pt, minimum size=6.5mm, font=\scriptsize, fill=orange!15, draw=orange!70!black},
+  wpar/.style={draw, circle, inner sep=1pt, minimum size=6.5mm, font=\scriptsize, fill=green!15, draw=green!50!black},
+  box/.style={draw, rounded corners, minimum height=37mm, minimum width=12mm, font=\small, fill=gray!10},
+  lab/.style={font=\footnotesize, align=center},
+  arr/.style={-{Latex[length=2mm]}, thick}]
+  \foreach \t [count=\k] in {x_{i+2},x_{i+1},x_{i},x_{i-1},x_{i-2}}{
+    \node[cell] (x\k) at (0,-\k*0.75) {$\t$};
+    \node[par] (b\k) at (1.45,-\k*0.75) {$+b_{\k}$};
+    \draw[arr] (x\k) -- (b\k);}
+  \node[box] (S) at (3.3,-2.25) {\rotatebox{90}{SORT}};
+  \foreach \k in {1,...,5}{\draw[arr] (b\k) -- (S.west |- b\k);}
+  \foreach \k in {1,...,5}{
+    \node[cell, minimum width=13mm] (z\k) at (5.25,-\k*0.75) {$(z{+}b)_{(\k)}$};
+    \draw[arr] (S.east |- z\k) -- (z\k);
+    \node[wpar] (h\k) at (6.85,-\k*0.75) {$\times h_{\k}$};
+    \draw[arr] (z\k) -- (h\k);}
+  \node[draw, circle, thick, minimum size=8mm] (sum) at (8.35,-2.25) {$\Sigma$};
+  \foreach \k in {1,...,5}{\draw[arr] (h\k) -- (sum);}
+  \draw[arr] (sum) -- ++(1.1,0) node[right]{$y_i$};
+  \node[lab, orange!70!black] at (1.45,0.1) {offsets $b_j$\\(act on positions)};
+  \node[lab, green!40!black] at (6.85,0.1) {weights $h_k$\\(act on ranks)};
+  \node[lab] at (4.2,-4.55) {$y_i=\sum_k |h_k|\,(z+b)_{(k)}$: offsets enter the \emph{values}, so the stage can be adapted with gradients (LMS in 1993).};
+\end{tikzpicture}

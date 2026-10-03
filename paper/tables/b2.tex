@@ -1,0 +1,17 @@
+\begin{table}[t]\centering\small
+\caption{B2 coverage: excess normalised mean squared error (NMSE, dB) above the noise floor of the true operator (input $U[-5,5]$, SNR 35\,dB, mean of 2 seeds). Bold: $\le1$\,dB (operator represented); red: $>6$\,dB (not represented). Parameters in the last row.}\label{tab:b2}
+\setlength{\tabcolsep}{4pt}\resizebox{\linewidth}{!}{\begin{tabular}{llrrrrrrr}\toprule
+Target & Class & WOS-R chain & WOS-R bank 4 & bank 4, ramp only & NEst bank 4 & MLP & CNN-M & Transformer\\\midrule
+Median 7 & rank & \textbf{0.0} & \textbf{0.0} & \textcolor{red!70!black}{19.8} & \textbf{0.1} & \textcolor{red!70!black}{16.8} & \textcolor{red!70!black}{18.9} & \textcolor{red!70!black}{26.2}\\
+Flat erosion 5 & morphological & \textbf{0.0} & \textbf{0.0} & \textcolor{red!70!black}{20.6} & 3.3 & \textcolor{red!70!black}{6.5} & \textcolor{red!70!black}{9.5} & 5.5\\
+Opening 5 & morph., 2 stages & \textcolor{red!70!black}{19.7} & \textcolor{red!70!black}{14.5} & \textcolor{red!70!black}{23.6} & 1.2 & \textcolor{red!70!black}{13.0} & \textcolor{red!70!black}{12.6} & \textcolor{red!70!black}{24.6}\\
+WOS $(1,3,0,2,4,1,2)$ & WOS & \textbf{0.0} & \textbf{0.0} & \textcolor{red!70!black}{20.2} & \textcolor{red!70!black}{22.4} & \textcolor{red!70!black}{10.3} & \textcolor{red!70!black}{16.7} & \textcolor{red!70!black}{25.5}\\
+Rank cascade \#1 & rank cascade & \textbf{0.0} & \textbf{0.0} & -- & \textbf{0.5} & \textcolor{red!70!black}{18.1} & \textcolor{red!70!black}{19.9} & \textcolor{red!70!black}{26.8}\\
+Rank cascade \#12 & rank cascade & \textcolor{red!70!black}{19.8} & \textcolor{red!70!black}{12.3} & -- & \textcolor{red!70!black}{11.3} & \textcolor{red!70!black}{16.0} & \textcolor{red!70!black}{16.2} & \textcolor{red!70!black}{24.6}\\
+Rank cascade \#5 & rank cascade & \textcolor{red!70!black}{25.2} & \textcolor{red!70!black}{21.4} & -- & \textcolor{red!70!black}{20.4} & \textcolor{red!70!black}{17.7} & \textcolor{red!70!black}{19.7} & \textcolor{red!70!black}{26.1}\\
+Moving average 5 & linear, $h\ge0$ & \textcolor{red!70!black}{32.6} & \textcolor{red!70!black}{22.8} & -- & \textbf{0.8} & \textbf{0.8} & 1.1 & 2.3\\
+High-pass $[-1,2,-1]/2$ & linear, signed & \textcolor{red!70!black}{30.3} & \textcolor{red!70!black}{24.4} & -- & \textbf{0.8} & \textbf{0.1} & \textbf{0.2} & \textbf{0.2}\\
+Top-hat $x-$opening & non-increasing & \textcolor{red!70!black}{31.2} & \textcolor{red!70!black}{20.1} & -- & 2.0 & \textcolor{red!70!black}{11.2} & \textcolor{red!70!black}{7.9} & \textcolor{red!70!black}{23.4}\\
+Point-wise $x^2/5$ & not translation-inv. & \textcolor{red!70!black}{29.6} & \textcolor{red!70!black}{26.2} & -- & \textcolor{red!70!black}{20.6} & 1.5 & 4.0 & \textbf{0.7}\\
+\midrule Params & & 16 & 69 & 69 & 117 & 5\,249 & 3\,857 & 4\,561\\
+\bottomrule\end{tabular}}\end{table}

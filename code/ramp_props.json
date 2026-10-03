@@ -1,0 +1,54 @@
+{
+ "ejemplo_usuario": [
+  0.0,
+  0.25,
+  0.5,
+  0.75,
+  1.0
+ ],
+ "mediana_rampa_vs_L(1/4,1/2,1/4)_maxerr": 1.1920928955078125e-07,
+ "WOS (seleccion)": {
+  "creciente": true,
+  "V_inv_err": 0.0,
+  "escala_err": 0.0,
+  "lipschitz_inf": 1.000001072883606
+ },
+ "rampa continua beta=1": {
+  "creciente": false,
+  "V_inv_err": 9.5367431640625e-07,
+  "escala_err": 4.76837158203125e-07,
+  "lipschitz_inf": 5.728527545928955
+ },
+ "rampa continua beta=0.5": {
+  "creciente": false,
+  "V_inv_err": 4.76837158203125e-07,
+  "escala_err": 4.76837158203125e-07,
+  "lipschitz_inf": 3.8766608238220215
+ },
+ "rampa discreta (enteros)": {
+  "creciente": false,
+  "V_inv_err": 4.76837158203125e-07,
+  "escala_err": 4.76837158203125e-07,
+  "lipschitz_inf": 9.1370849609375
+ },
+ "salto_max_en_r (WOS, dr=5e-3)": 3.4579262733459473,
+ "salto_max_en_r (rampa beta=1, dr=5e-3)": 0.16963887214660645,
+ "salto_max_en_r (rampa beta=0.5, dr=5e-3)": 1.7796543836593628,
+ "grad_no_nulo_w": 1.0,
+ "grad_r": 5482.11767578125,
+ "ruptura mediana5, 1 impulsos": {
+  "mediana": 2.62908673286438,
+  "rampa_continua": 2.216928243637085,
+  "rampa_discreta": 2.62908673286438
+ },
+ "ruptura mediana5, 2 impulsos": {
+  "mediana": 3.8812358379364014,
+  "rampa_continua": 250002.203125,
+  "rampa_discreta": 3.8812358379364014
+ },
+ "ruptura mediana5, 3 impulsos": {
+  "mediana": 1000000.0,
+  "rampa_continua": 750000.9375,
+  "rampa_discreta": 1000000.0
+ }
+}

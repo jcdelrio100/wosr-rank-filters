@@ -1,0 +1,16 @@
+\begin{table*}[t]\centering\small
+\caption{B5: Byzantine/fault-robust aggregation (Fashion-MNIST, $n{=}20$ nodes, $f{=}4$ faulty, 300 steps, mean of 2 seeds). Test accuracy under each attack with heterogeneous data (Dirichlet $\alpha{=}0.1$), and worst case over attacks for $\alpha\in\{1,0.1\}$. CW: coordinate-wise; Med$_t$3: per-node temporal median of the last 3 submissions; NNM: nearest-neighbour mixing \cite{allouah2023}; AMO: adaptive minimax ordered weighted average (OWA). Attacks: ALIE (``a little is enough''), IPM (inner-product manipulation), burst-8 (faults persisting 8 steps), SDC (silent data corruption). $^\dagger$AMO uses a precomputed library of 5 OWA weight vectors (minimax second-order cone program), no training.}\label{tab:b5}
+\resizebox{\linewidth}{!}{\begin{tabular}{lr|ccccccc|cc}\toprule
+& & \multicolumn{7}{c|}{$\alpha=0.1$} & \multicolumn{2}{c}{worst case}\\
+Aggregator & Params & none & sign-flip & ALIE & IPM & burst-8 & SDC & Gauss+burst & $\alpha{=}1$ & $\alpha{=}0.1$\\\midrule
+Mean & 0 & 0.814 & 0.414 & 0.787 & 0.789 & 0.100 & 0.100 & 0.100 & 0.100 & 0.100\\
+CW median & 0 & 0.603 & 0.599 & 0.565 & 0.465 & 0.244 & 0.683 & 0.100 & 0.100 & 0.100\\
+CW trimmed mean & 0 & 0.728 & 0.642 & 0.728 & 0.372 & 0.100 & 0.707 & 0.100 & 0.100 & 0.100\\
+NNM + CW trim & 0 & 0.793 & 0.727 & 0.714 & 0.695 & 0.100 & 0.803 & 0.100 & 0.100 & 0.100\\
+Centred clipping & 0 & 0.806 & 0.681 & 0.771 & 0.693 & 0.707 & 0.803 & 0.141 & 0.177 & 0.141\\
+AMO (minimax OWA) & 0$^\dagger$ & 0.591 & 0.551 & 0.610 & 0.410 & 0.247 & 0.602 & 0.100 & 0.100 & 0.100\\
+Med$_t$3 $\to$ AMO & 0$^\dagger$ & 0.576 & 0.502 & 0.527 & 0.264 & 0.542 & 0.548 & 0.539 & 0.691 & 0.264\\
+Med$_t$3 $\to$ NNM $\to$ CW trim & 0 & 0.779 & 0.672 & 0.772 & 0.535 & 0.782 & 0.773 & 0.762 & \textbf{0.753} & 0.535\\
+Sorted-MLP aggregator & 5\,569 & 0.673 & 0.646 & 0.718 & 0.380 & 0.101 & 0.113 & 0.100 & 0.100 & 0.100\\
+Med$_t$3 $\to$ NNM $\to$ sorted-MLP & 5\,569 & 0.777 & 0.703 & 0.767 & 0.615 & 0.780 & 0.775 & 0.773 & 0.740 & \textbf{0.615}\\
+\bottomrule\end{tabular}}\end{table*}

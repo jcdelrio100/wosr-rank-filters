@@ -1,0 +1,1314 @@
+[
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "WOS-R cadena",
+"seed": 1,
+"gap": 0.0,
+"floor": -30.330536365509033,
+"params": 16,
+"gap_ramp_deploy": 19.32021737098694
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "WOS-R cadena",
+"seed": 0,
+"gap": 0.0,
+"floor": -30.3934645652771,
+"params": 16,
+"gap_ramp_deploy": 19.552987813949585
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "WOS-R banco C=4 [solo rampa]",
+"seed": 1,
+"gap": 19.471923112869263,
+"floor": -30.330536365509033,
+"params": 69,
+"gap_ramp_deploy": 18.588058948516846
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "WOS-R banco C=4 [solo rampa]",
+"seed": 0,
+"gap": 20.12396812438965,
+"floor": -30.3934645652771,
+"params": 69,
+"gap_ramp_deploy": 18.8642680644989
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "NEst banco C=4",
+"seed": 1,
+"gap": 0.006906986236572266,
+"floor": -30.330536365509033,
+"params": 117
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "NEst banco C=4",
+"seed": 0,
+"gap": 0.2732515335083008,
+"floor": -30.3934645652771,
+"params": 117
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "MLP",
+"seed": 0,
+"gap": 16.7477285861969,
+"floor": -30.3934645652771,
+"params": 5249
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "MLP",
+"seed": 1,
+"gap": 16.80292010307312,
+"floor": -30.330536365509033,
+"params": 5249
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "CNN-M",
+"seed": 0,
+"gap": 18.880560398101807,
+"floor": -30.3934645652771,
+"params": 3857
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "CNN-M",
+"seed": 1,
+"gap": 18.979541063308716,
+"floor": -30.330536365509033,
+"params": 3857
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "Transformer",
+"seed": 0,
+"gap": 26.24669224023819,
+"floor": -30.3934645652771,
+"params": 4561
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "Transformer",
+"seed": 1,
+"gap": 26.10275387763977,
+"floor": -30.330536365509033,
+"params": 4561
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "WOS-R cadena",
+"seed": 0,
+"gap": 0.0,
+"floor": -37.041380405426025,
+"params": 16,
+"gap_ramp_deploy": 18.812564611434937
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "WOS-R cadena",
+"seed": 1,
+"gap": 0.0,
+"floor": -36.98019981384277,
+"params": 16,
+"gap_ramp_deploy": 18.103352785110474
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "WOS-R banco C=4 [solo rampa]",
+"seed": 0,
+"gap": 20.643203258514404,
+"floor": -37.041380405426025,
+"params": 69,
+"gap_ramp_deploy": 15.008401870727539
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "WOS-R banco C=4 [solo rampa]",
+"seed": 1,
+"gap": 20.495682954788208,
+"floor": -36.98019981384277,
+"params": 69,
+"gap_ramp_deploy": 14.702839851379395
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "NEst banco C=4",
+"seed": 0,
+"gap": 3.0446362495422363,
+"floor": -37.041380405426025,
+"params": 117
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "NEst banco C=4",
+"seed": 1,
+"gap": 3.5084080696105957,
+"floor": -36.98019981384277,
+"params": 117
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "MLP",
+"seed": 0,
+"gap": 6.48479700088501,
+"floor": -37.041380405426025,
+"params": 5249
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "MLP",
+"seed": 1,
+"gap": 6.565964221954346,
+"floor": -36.98019981384277,
+"params": 5249
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "CNN-M",
+"seed": 0,
+"gap": 10.029971599578857,
+"floor": -37.041380405426025,
+"params": 3857
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "CNN-M",
+"seed": 1,
+"gap": 8.966395854949951,
+"floor": -36.98019981384277,
+"params": 3857
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "Transformer",
+"seed": 0,
+"gap": 5.483465194702148,
+"floor": -37.041380405426025,
+"params": 4561
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "Transformer",
+"seed": 1,
+"gap": 5.496807098388672,
+"floor": -36.98019981384277,
+"params": 4561
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "WOS-R cadena",
+"seed": 0,
+"gap": 21.326682567596436,
+"floor": -35.03333806991577,
+"params": 16,
+"gap_ramp_deploy": 23.25156807899475
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "WOS-R cadena",
+"seed": 1,
+"gap": 18.09256076812744,
+"floor": -35.02213478088379,
+"params": 16,
+"gap_ramp_deploy": 22.84193515777588
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "WOS-R banco C=4 [solo rampa]",
+"seed": 1,
+"gap": 23.9039409160614,
+"floor": -35.02213478088379,
+"params": 69,
+"gap_ramp_deploy": 18.37226390838623
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "WOS-R banco C=4 [solo rampa]",
+"seed": 0,
+"gap": 23.295615911483765,
+"floor": -35.03333806991577,
+"params": 69,
+"gap_ramp_deploy": 19.80115056037903
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "NEst banco C=4",
+"seed": 1,
+"gap": 1.2531256675720215,
+"floor": -35.02213478088379,
+"params": 117
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "NEst banco C=4",
+"seed": 0,
+"gap": 1.2451410293579102,
+"floor": -35.03333806991577,
+"params": 117
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "MLP",
+"seed": 1,
+"gap": 12.957115173339844,
+"floor": -35.02213478088379,
+"params": 5249
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "MLP",
+"seed": 0,
+"gap": 12.99515962600708,
+"floor": -35.03333806991577,
+"params": 5249
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "CNN-M",
+"seed": 0,
+"gap": 12.479045391082764,
+"floor": -35.03333806991577,
+"params": 3857
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "CNN-M",
+"seed": 1,
+"gap": 12.630712985992432,
+"floor": -35.02213478088379,
+"params": 3857
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "Transformer",
+"seed": 1,
+"gap": 24.602932929992676,
+"floor": -35.02213478088379,
+"params": 4561
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "Transformer",
+"seed": 0,
+"gap": 24.69002366065979,
+"floor": -35.03333806991577,
+"params": 4561
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "WOS-R cadena",
+"seed": 0,
+"gap": 0.0,
+"floor": -31.941654682159424,
+"params": 16,
+"gap_ramp_deploy": 21.658002138137817
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "WOS-R cadena",
+"seed": 1,
+"gap": 0.0,
+"floor": -31.89298391342163,
+"params": 16,
+"gap_ramp_deploy": 21.625235080718994
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "WOS-R banco C=4 [solo rampa]",
+"seed": 0,
+"gap": 19.80747699737549,
+"floor": -31.941654682159424,
+"params": 69,
+"gap_ramp_deploy": 20.724819898605347
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "WOS-R banco C=4 [solo rampa]",
+"seed": 1,
+"gap": 20.616391897201538,
+"floor": -31.89298391342163,
+"params": 69,
+"gap_ramp_deploy": 20.59923529624939
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "NEst banco C=4",
+"seed": 0,
+"gap": 22.766299843788147,
+"floor": -31.941654682159424,
+"params": 117
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "NEst banco C=4",
+"seed": 1,
+"gap": 22.0248806476593,
+"floor": -31.89298391342163,
+"params": 117
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "MLP",
+"seed": 0,
+"gap": 10.16007661819458,
+"floor": -31.941654682159424,
+"params": 5249
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "MLP",
+"seed": 1,
+"gap": 10.47717571258545,
+"floor": -31.89298391342163,
+"params": 5249
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "CNN-M",
+"seed": 0,
+"gap": 16.80770993232727,
+"floor": -31.941654682159424,
+"params": 3857
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "CNN-M",
+"seed": 1,
+"gap": 16.604609489440918,
+"floor": -31.89298391342163,
+"params": 3857
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "Transformer",
+"seed": 1,
+"gap": 25.46930193901062,
+"floor": -31.89298391342163,
+"params": 4561
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "Transformer",
+"seed": 0,
+"gap": 25.508888959884644,
+"floor": -31.941654682159424,
+"params": 4561
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "WOS-R banco C=4",
+"seed": 0,
+"gap": -0.0002956390380859375,
+"floor": -30.3934645652771,
+"params": 69,
+"gap_ramp_deploy": 22.179952263832092
+},
+{
+"target": "Mediana 7",
+"cls": "rango",
+"model": "WOS-R banco C=4",
+"seed": 1,
+"gap": 0.006530284881591797,
+"floor": -30.330536365509033,
+"params": 69,
+"gap_ramp_deploy": 22.886173725128174
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "WOS-R banco C=4",
+"seed": 0,
+"gap": 0.0010728836059570312,
+"floor": -37.041380405426025,
+"params": 69,
+"gap_ramp_deploy": 18.997303247451782
+},
+{
+"target": "Erosi\u00f3n plana 5",
+"cls": "morfol\u00f3gico",
+"model": "WOS-R banco C=4",
+"seed": 1,
+"gap": 0.008029937744140625,
+"floor": -36.98019981384277,
+"params": 69,
+"gap_ramp_deploy": 19.400867223739624
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "WOS-R banco C=4",
+"seed": 1,
+"gap": 14.762232303619385,
+"floor": -35.02213478088379,
+"params": 69,
+"gap_ramp_deploy": 21.66015625
+},
+{
+"target": "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)",
+"cls": "morfol\u00f3gico 2 etapas",
+"model": "WOS-R banco C=4",
+"seed": 0,
+"gap": 14.332377910614014,
+"floor": -35.03333806991577,
+"params": 69,
+"gap_ramp_deploy": 22.424498796463013
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "WOS-R banco C=4",
+"seed": 1,
+"gap": 0.0035238265991210938,
+"floor": -31.89298391342163,
+"params": 69,
+"gap_ramp_deploy": 22.806008458137512
+},
+{
+"target": "WOS ponderado (1,3,0,2,4,1,2)",
+"cls": "WOS",
+"model": "WOS-R banco C=4",
+"seed": 0,
+"gap": -0.00012874603271484375,
+"floor": -31.941654682159424,
+"params": 69,
+"gap_ramp_deploy": 22.93894350528717
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "WOS-R cadena",
+"seed": 1,
+"gap": 0.0,
+"floor": -31.993074417114258,
+"params": 16,
+"gap_ramp_deploy": 19.934133291244507
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "WOS-R cadena",
+"seed": 0,
+"gap": 0.0,
+"floor": -31.95340394973755,
+"params": 16,
+"gap_ramp_deploy": 19.921764135360718
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "WOS-R banco C=4",
+"seed": 1,
+"gap": 0.00017881393432617188,
+"floor": -31.993074417114258,
+"params": 69,
+"gap_ramp_deploy": 20.37665843963623
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "WOS-R banco C=4",
+"seed": 0,
+"gap": 0.007109642028808594,
+"floor": -31.95340394973755,
+"params": 69,
+"gap_ramp_deploy": 20.878825187683105
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "NEst banco C=4",
+"seed": 0,
+"gap": 0.5399298667907715,
+"floor": -31.95340394973755,
+"params": 117
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "NEst banco C=4",
+"seed": 1,
+"gap": 0.3805708885192871,
+"floor": -31.993074417114258,
+"params": 117
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "MLP",
+"seed": 0,
+"gap": 17.720468044281006,
+"floor": -31.95340394973755,
+"params": 5249
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "MLP",
+"seed": 1,
+"gap": 18.470884561538696,
+"floor": -31.993074417114258,
+"params": 5249
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "CNN-M",
+"seed": 0,
+"gap": 19.78602647781372,
+"floor": -31.95340394973755,
+"params": 3857
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "CNN-M",
+"seed": 1,
+"gap": 19.95376229286194,
+"floor": -31.993074417114258,
+"params": 3857
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "Transformer",
+"seed": 0,
+"gap": 26.788554191589355,
+"floor": -31.95340394973755,
+"params": 4561
+},
+{
+"target": "Cascada E2 t1",
+"cls": "cascada de rango",
+"model": "Transformer",
+"seed": 1,
+"gap": 26.867712140083313,
+"floor": -31.993074417114258,
+"params": 4561
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "WOS-R cadena",
+"seed": 0,
+"gap": 19.51979637145996,
+"floor": -37.53977298736572,
+"params": 16,
+"gap_ramp_deploy": 16.822988986968994
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "WOS-R cadena",
+"seed": 1,
+"gap": 20.113167762756348,
+"floor": -37.74966478347778,
+"params": 16,
+"gap_ramp_deploy": 17.272210121154785
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "WOS-R banco C=4",
+"seed": 0,
+"gap": 10.147364139556885,
+"floor": -37.53977298736572,
+"params": 69,
+"gap_ramp_deploy": 19.60017204284668
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "WOS-R banco C=4",
+"seed": 1,
+"gap": 14.430317878723145,
+"floor": -37.74966478347778,
+"params": 69,
+"gap_ramp_deploy": 18.470032215118408
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "NEst banco C=4",
+"seed": 0,
+"gap": 10.996205806732178,
+"floor": -37.53977298736572,
+"params": 117
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "NEst banco C=4",
+"seed": 1,
+"gap": 11.63820505142212,
+"floor": -37.74966478347778,
+"params": 117
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "MLP",
+"seed": 0,
+"gap": 16.038951873779297,
+"floor": -37.53977298736572,
+"params": 5249
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "MLP",
+"seed": 1,
+"gap": 16.047496795654297,
+"floor": -37.74966478347778,
+"params": 5249
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "CNN-M",
+"seed": 0,
+"gap": 16.016182899475098,
+"floor": -37.53977298736572,
+"params": 3857
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "CNN-M",
+"seed": 1,
+"gap": 16.434953212738037,
+"floor": -37.74966478347778,
+"params": 3857
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "Transformer",
+"seed": 0,
+"gap": 24.566131830215454,
+"floor": -37.53977298736572,
+"params": 4561
+},
+{
+"target": "Cascada E2 t12",
+"cls": "cascada de rango",
+"model": "Transformer",
+"seed": 1,
+"gap": 24.590046405792236,
+"floor": -37.74966478347778,
+"params": 4561
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "WOS-R cadena",
+"seed": 0,
+"gap": 25.332398414611816,
+"floor": -34.944069385528564,
+"params": 16,
+"gap_ramp_deploy": 24.088306427001953
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "WOS-R cadena",
+"seed": 1,
+"gap": 25.057702660560608,
+"floor": -35.0008749961853,
+"params": 16,
+"gap_ramp_deploy": 24.175126552581787
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "WOS-R banco C=4",
+"seed": 0,
+"gap": 21.393603086471558,
+"floor": -34.944069385528564,
+"params": 69,
+"gap_ramp_deploy": 23.42325448989868
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "WOS-R banco C=4",
+"seed": 1,
+"gap": 21.41077995300293,
+"floor": -35.0008749961853,
+"params": 69,
+"gap_ramp_deploy": 22.825216054916382
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "NEst banco C=4",
+"seed": 0,
+"gap": 20.490851402282715,
+"floor": -34.944069385528564,
+"params": 117
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "NEst banco C=4",
+"seed": 1,
+"gap": 20.405943393707275,
+"floor": -35.0008749961853,
+"params": 117
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "MLP",
+"seed": 0,
+"gap": 17.8940749168396,
+"floor": -34.944069385528564,
+"params": 5249
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "MLP",
+"seed": 1,
+"gap": 17.51399040222168,
+"floor": -35.0008749961853,
+"params": 5249
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "CNN-M",
+"seed": 0,
+"gap": 19.528651237487793,
+"floor": -34.944069385528564,
+"params": 3857
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "CNN-M",
+"seed": 1,
+"gap": 19.941805601119995,
+"floor": -35.0008749961853,
+"params": 3857
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "Transformer",
+"seed": 0,
+"gap": 26.140543222427368,
+"floor": -34.944069385528564,
+"params": 4561
+},
+{
+"target": "Cascada E2 t5",
+"cls": "cascada de rango",
+"model": "Transformer",
+"seed": 1,
+"gap": 26.10529661178589,
+"floor": -35.0008749961853,
+"params": 4561
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "WOS-R cadena",
+"seed": 0,
+"gap": 32.60157749056816,
+"floor": -34.971182346343994,
+"params": 16,
+"gap_ramp_deploy": 29.177616834640503
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "WOS-R cadena",
+"seed": 1,
+"gap": 32.656732350587845,
+"floor": -35.0963020324707,
+"params": 16,
+"gap_ramp_deploy": 29.288939237594604
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "WOS-R banco C=4",
+"seed": 0,
+"gap": 22.20559597015381,
+"floor": -34.971182346343994,
+"params": 69,
+"gap_ramp_deploy": 20.73304533958435
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "WOS-R banco C=4",
+"seed": 1,
+"gap": 23.41350793838501,
+"floor": -35.0963020324707,
+"params": 69,
+"gap_ramp_deploy": 22.467271089553833
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "NEst banco C=4",
+"seed": 0,
+"gap": 0.6551480293273926,
+"floor": -34.971182346343994,
+"params": 117
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "NEst banco C=4",
+"seed": 1,
+"gap": 0.8817625045776367,
+"floor": -35.0963020324707,
+"params": 117
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "MLP",
+"seed": 0,
+"gap": 0.5744290351867676,
+"floor": -34.971182346343994,
+"params": 5249
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "MLP",
+"seed": 1,
+"gap": 1.0614585876464844,
+"floor": -35.0963020324707,
+"params": 5249
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "CNN-M",
+"seed": 0,
+"gap": 0.565187931060791,
+"floor": -34.971182346343994,
+"params": 3857
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "CNN-M",
+"seed": 1,
+"gap": 1.6311097145080566,
+"floor": -35.0963020324707,
+"params": 3857
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "Transformer",
+"seed": 1,
+"gap": 1.6985440254211426,
+"floor": -35.0963020324707,
+"params": 4561
+},
+{
+"target": "Media m\u00f3vil 5",
+"cls": "lineal, pesos \u22650",
+"model": "Transformer",
+"seed": 0,
+"gap": 2.893345355987549,
+"floor": -34.971182346343994,
+"params": 4561
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "WOS-R cadena",
+"seed": 0,
+"gap": 30.279853641986847,
+"floor": -34.96926307678223,
+"params": 16,
+"gap_ramp_deploy": 30.745771527290344
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "WOS-R cadena",
+"seed": 1,
+"gap": 30.248826444149017,
+"floor": -34.97197389602661,
+"params": 16,
+"gap_ramp_deploy": 30.726032257080078
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "WOS-R banco C=4",
+"seed": 1,
+"gap": 24.665496349334717,
+"floor": -34.97197389602661,
+"params": 69,
+"gap_ramp_deploy": 25.005566477775574
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "WOS-R banco C=4",
+"seed": 0,
+"gap": 24.152977466583252,
+"floor": -34.96926307678223,
+"params": 69,
+"gap_ramp_deploy": 25.282516479492188
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "NEst banco C=4",
+"seed": 0,
+"gap": 0.1327800750732422,
+"floor": -34.96926307678223,
+"params": 117
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "NEst banco C=4",
+"seed": 1,
+"gap": 1.5176010131835938,
+"floor": -34.97197389602661,
+"params": 117
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "MLP",
+"seed": 0,
+"gap": 0.11406898498535156,
+"floor": -34.96926307678223,
+"params": 5249
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "MLP",
+"seed": 1,
+"gap": 0.1523303985595703,
+"floor": -34.97197389602661,
+"params": 5249
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "CNN-M",
+"seed": 0,
+"gap": 0.21611452102661133,
+"floor": -34.96926307678223,
+"params": 3857
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "CNN-M",
+"seed": 1,
+"gap": 0.18142461776733398,
+"floor": -34.97197389602661,
+"params": 3857
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "Transformer",
+"seed": 0,
+"gap": 0.20555496215820312,
+"floor": -34.96926307678223,
+"params": 4561
+},
+{
+"target": "Paso alto [-1,2,-1]/2",
+"cls": "lineal con signo",
+"model": "Transformer",
+"seed": 1,
+"gap": 0.14640331268310547,
+"floor": -34.97197389602661,
+"params": 4561
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "WOS-R cadena",
+"seed": 0,
+"gap": 31.241742372512817,
+"floor": -35.29640436172485,
+"params": 16,
+"gap_ramp_deploy": 29.790343642234802
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "WOS-R cadena",
+"seed": 1,
+"gap": 31.210485994815826,
+"floor": -35.25845766067505,
+"params": 16,
+"gap_ramp_deploy": 29.769227504730225
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "WOS-R banco C=4",
+"seed": 0,
+"gap": 19.91965651512146,
+"floor": -35.29640436172485,
+"params": 69,
+"gap_ramp_deploy": 23.620774745941162
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "WOS-R banco C=4",
+"seed": 1,
+"gap": 20.268399715423584,
+"floor": -35.25845766067505,
+"params": 69,
+"gap_ramp_deploy": 24.040255546569824
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "NEst banco C=4",
+"seed": 0,
+"gap": 1.875317096710205,
+"floor": -35.29640436172485,
+"params": 117
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "NEst banco C=4",
+"seed": 1,
+"gap": 2.2044730186462402,
+"floor": -35.25845766067505,
+"params": 117
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "MLP",
+"seed": 0,
+"gap": 12.023367881774902,
+"floor": -35.29640436172485,
+"params": 5249
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "MLP",
+"seed": 1,
+"gap": 10.2862548828125,
+"floor": -35.25845766067505,
+"params": 5249
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "CNN-M",
+"seed": 0,
+"gap": 8.102433681488037,
+"floor": -35.29640436172485,
+"params": 3857
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "CNN-M",
+"seed": 1,
+"gap": 7.602488994598389,
+"floor": -35.25845766067505,
+"params": 3857
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "Transformer",
+"seed": 1,
+"gap": 23.330097198486328,
+"floor": -35.25845766067505,
+"params": 4561
+},
+{
+"target": "Top-hat x \u2212 apertura",
+"cls": "no creciente",
+"model": "Transformer",
+"seed": 0,
+"gap": 23.468345403671265,
+"floor": -35.29640436172485,
+"params": 4561
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "WOS-R cadena",
+"seed": 0,
+"gap": 29.605736285448074,
+"floor": -31.58370018005371,
+"params": 16,
+"gap_ramp_deploy": 29.10418927669525
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "WOS-R cadena",
+"seed": 1,
+"gap": 29.653838574886322,
+"floor": -31.509337425231934,
+"params": 16,
+"gap_ramp_deploy": 29.092179238796234
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "WOS-R banco C=4",
+"seed": 0,
+"gap": 26.031928658485413,
+"floor": -31.58370018005371,
+"params": 69,
+"gap_ramp_deploy": 26.36299431324005
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "WOS-R banco C=4",
+"seed": 1,
+"gap": 26.35271728038788,
+"floor": -31.509337425231934,
+"params": 69,
+"gap_ramp_deploy": 28.17244380712509
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "NEst banco C=4",
+"seed": 0,
+"gap": 20.752367973327637,
+"floor": -31.58370018005371,
+"params": 117
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "NEst banco C=4",
+"seed": 1,
+"gap": 20.525622367858887,
+"floor": -31.509337425231934,
+"params": 117
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "MLP",
+"seed": 0,
+"gap": 1.371302604675293,
+"floor": -31.58370018005371,
+"params": 5249
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "MLP",
+"seed": 1,
+"gap": 1.6739773750305176,
+"floor": -31.509337425231934,
+"params": 5249
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "CNN-M",
+"seed": 0,
+"gap": 4.131155014038086,
+"floor": -31.58370018005371,
+"params": 3857
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "CNN-M",
+"seed": 1,
+"gap": 3.8999509811401367,
+"floor": -31.509337425231934,
+"params": 3857
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "Transformer",
+"seed": 0,
+"gap": 0.9158873558044434,
+"floor": -31.58370018005371,
+"params": 4561
+},
+{
+"target": "No linealidad puntual x\u00b2/5",
+"cls": "no invariante en nivel",
+"model": "Transformer",
+"seed": 1,
+"gap": 0.565338134765625,
+"floor": -31.509337425231934,
+"params": 4561
+}
+]

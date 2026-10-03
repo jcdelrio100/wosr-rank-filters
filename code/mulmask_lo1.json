@@ -1,0 +1,422 @@
+[
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.005402565002441406,
+  "floor": -36.46003246307373
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.04809856414794922,
+  "floor": -36.36258840560913
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 20.090365409851074,
+  "floor": -36.36258840560913
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 20.31837821006775,
+  "floor": -36.46003246307373
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 14.796805381774902,
+  "floor": -36.46003246307373
+ },
+ {
+  "target": "E1 max\u2192min",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 13.242287635803223,
+  "floor": -36.36258840560913
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.12141942977905273,
+  "floor": -30.658819675445557
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.15729665756225586,
+  "floor": -30.63699960708618
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 21.709964871406555,
+  "floor": -30.658819675445557
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 21.789210438728333,
+  "floor": -30.63699960708618
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 0.02215862274169922,
+  "floor": -30.658819675445557
+ },
+ {
+  "target": "min\u2218id (erosi\u00f3n {0,2,5})",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 0.0627589225769043,
+  "floor": -30.63699960708618
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.15111207962036133,
+  "floor": -37.33635425567627
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.09567975997924805,
+  "floor": -37.41262912750244
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 20.281189680099487,
+  "floor": -37.41262912750244
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 20.2557373046875,
+  "floor": -37.33635425567627
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 0.08321762084960938,
+  "floor": -37.41262912750244
+ },
+ {
+  "target": "max\u2218id (dilataci\u00f3n {1,3,6})",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 0.19325971603393555,
+  "floor": -37.33635425567627
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.03575325012207031,
+  "floor": -34.649479389190674
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.0034737586975097656,
+  "floor": -34.78137493133545
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": -0.01478433609008789,
+  "floor": -34.649479389190674
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": -0.004985332489013672,
+  "floor": -34.78137493133545
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 0.023071765899658203,
+  "floor": -34.649479389190674
+ },
+ {
+  "target": "mediana5\u2218id",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 0.006163120269775391,
+  "floor": -34.78137493133545
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 16.021209955215454,
+  "floor": -34.64197635650635
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 16.387916803359985,
+  "floor": -34.75238084793091
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 16.102545261383057,
+  "floor": -34.64197635650635
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 16.414295434951782,
+  "floor": -34.75238084793091
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 16.422889232635498,
+  "floor": -34.75238084793091
+ },
+ {
+  "target": "med\u2218med",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 16.05866551399231,
+  "floor": -34.64197635650635
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.03548383712768555,
+  "floor": -32.87648677825928
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.01919269561767578,
+  "floor": -32.79531717300415
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 17.989383935928345,
+  "floor": -32.87648677825928
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 18.027501106262207,
+  "floor": -32.79531717300415
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 13.59086275100708,
+  "floor": -32.87648677825928
+ },
+ {
+  "target": "E2 t=1",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 0.0029778480529785156,
+  "floor": -32.79531717300415
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 14.991354942321777,
+  "floor": -31.710615158081055
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 15.37123441696167,
+  "floor": -31.73234462738037
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 15.233603715896606,
+  "floor": -31.710615158081055
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 16.01104974746704,
+  "floor": -31.73234462738037
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 15.072062015533447,
+  "floor": -31.73234462738037
+ },
+ {
+  "target": "E2 t=8",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 15.024501085281372,
+  "floor": -31.710615158081055
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 0.027492046356201172,
+  "floor": -34.86855506896973
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 0.02239704132080078,
+  "floor": -35.05937337875366
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 19.015458822250366,
+  "floor": -34.86855506896973
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 17.054250240325928,
+  "floor": -35.05937337875366
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 0.017523765563964844,
+  "floor": -34.86855506896973
+ },
+ {
+  "target": "E2 t=9",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 0.022034645080566406,
+  "floor": -35.05937337875366
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 7.868595123291016,
+  "floor": -38.39404821395874
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 7.613615989685059,
+  "floor": -38.524582386016846
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 6.607606410980225,
+  "floor": -38.39404821395874
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 6.787552833557129,
+  "floor": -38.524582386016846
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 6.572978496551514,
+  "floor": -38.39404821395874
+ },
+ {
+  "target": "E2 t=12",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 6.822910308837891,
+  "floor": -38.524582386016846
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 0,
+  "gap": 13.435724973678589,
+  "floor": -29.57645893096924
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 aditiva",
+  "seed": 1,
+  "gap": 15.571160316467285,
+  "floor": -29.467082023620605
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 0,
+  "gap": 16.55103325843811,
+  "floor": -29.57645893096924
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 multiplicativa",
+  "seed": 1,
+  "gap": 16.59207820892334,
+  "floor": -29.467082023620605
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 0,
+  "gap": 16.4539635181427,
+  "floor": -29.57645893096924
+ },
+ {
+  "target": "E2 t=14",
+  "variant": "pos \u00b7 log-aditiva",
+  "seed": 1,
+  "gap": 10.357563495635986,
+  "floor": -29.467082023620605
+ }
+]

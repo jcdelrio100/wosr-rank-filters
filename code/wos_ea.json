@@ -1,0 +1,427 @@
+[
+ {
+  "name": "E1 tesis max\u2192min",
+  "support": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   8,
+   9,
+   10,
+   11
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "min\u2192max (apertura 5)",
+  "support": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "mediana5\u2218mediana5",
+  "support": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "mediana7",
+  "support": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "is_wos": true,
+  "weights": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "T": 4,
+  "maxerr": 0.0
+ },
+ {
+  "name": "E2 t=0",
+  "support": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   10,
+   11
+  ],
+  "is_wos": true,
+  "weights": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "T": 7,
+  "maxerr": 0.0
+ },
+ {
+  "name": "E2 t=1",
+  "support": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "E2 t=2",
+  "support": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   11
+  ],
+  "is_wos": true,
+  "weights": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "T": 1,
+  "maxerr": 0.0
+ },
+ {
+  "name": "E2 t=3",
+  "support": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "is_wos": true,
+  "weights": [
+   1,
+   2,
+   2,
+   2,
+   2,
+   1,
+   1
+  ],
+  "T": 2,
+  "maxerr": 0.0
+ },
+ {
+  "name": "E2 t=4",
+  "support": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "is_wos": true,
+  "weights": [
+   1,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   1,
+   1
+  ],
+  "T": 2,
+  "maxerr": 0.0
+ },
+ {
+  "name": "E2 t=5",
+  "support": [
+   0,
+   1,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "E2 t=6",
+  "support": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "E2 t=7",
+  "support": [
+   0,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "E2 t=8",
+  "support": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "E2 t=9",
+  "support": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11,
+   12
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "E2 t=10",
+  "support": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "E2 t=11",
+  "support": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   6
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "E2 t=12",
+  "support": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "is_wos": true,
+  "weights": [
+   3,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   3,
+   1,
+   1,
+   1
+  ],
+  "T": 4,
+  "maxerr": 0.0
+ },
+ {
+  "name": "E2 t=13",
+  "support": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ],
+  "is_wos": true,
+  "weights": [
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   1
+  ],
+  "T": 2,
+  "maxerr": 0.0
+ },
+ {
+  "name": "E2 t=14",
+  "support": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   11
+  ],
+  "is_wos": false,
+  "weights": null,
+  "T": null
+ },
+ {
+  "name": "E2 t=15",
+  "support": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ],
+  "is_wos": true,
+  "weights": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "T": 1,
+  "maxerr": 0.0
+ }
+]

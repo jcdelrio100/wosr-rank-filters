@@ -1,0 +1,26 @@
+{
+ "20,4": {
+  "support": [
+   8,
+   13
+  ],
+  "trim_frac": 0.35,
+  "best_trim_frac": 0.35
+ },
+ "50,10": {
+  "support": [
+   22,
+   29
+  ],
+  "trim_frac": 0.42,
+  "best_trim_frac": 0.44
+ },
+ "100,20": {
+  "support": [
+   46,
+   55
+  ],
+  "trim_frac": 0.45,
+  "best_trim_frac": 0.45
+ }
+}

@@ -1,0 +1,5 @@
+{"note": "B2 setting, seed 0, 3000 steps; excess NMSE over floor (dB) of deployed model. ls: ramp-only training + least-squares refit of mix; refit: last 20% of steps at beta=0 + LS refit; anneal: beta 1->0 over first 70% of steps.",
+ "bank C=4": {"Mediana 7": {"ls": 19.20, "refit": 18.04, "anneal": 0.00},
+              "Apertura 5": {"ls": 16.78, "refit": 19.38, "anneal": 14.33},
+              "Erosion plana 5": {"anneal": 0.00}, "WOS ponderado": {"anneal": 0.00}},
+ "chain": {"Apertura 5": {"ramp": 21.33, "anneal": 21.05}, "Mediana 7": {"anneal": 0.00}}}

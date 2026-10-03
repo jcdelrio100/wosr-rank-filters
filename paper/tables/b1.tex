@@ -1,0 +1,18 @@
+\begin{table*}[t]\centering\small
+\caption{B1: 1D restoration, normalised mean squared error (NMSE) in dB (mean $\pm$ std over 3 seeds; lower is better). Impulsive models are trained with 10\,\% impulses; OOD (out-of-distribution) columns change impulse rate or amplitude. NEst: 1993 thesis structure; CNN-S/M/L: small/medium/large residual CNN. Gaussian models are trained with $\sigma=0.2$. Params, multiply--accumulates and comparisons per output sample; ms: CPU latency for 4096 samples (1 thread). Best per column in bold.}\label{tab:b1}
+\resizebox{\linewidth}{!}{\begin{tabular}{lrrrr|ccc|cc}\toprule
+& & & & & \multicolumn{3}{c|}{Impulsive} & \multicolumn{2}{c}{Gaussian}\\
+Model & Params & Mults & Comps & ms & in-dist & OOD $p{=}25\%$ & OOD $\times2$ & $\sigma{=}0.2$ & $\sigma{=}0.4$ (OOD)\\\midrule
+Median 5 & 0 & 0 & 15 & 0.3 & $-13.7\pm1.2$ & $-3.6\pm0.3$ & $-8.0\pm1.3$ & $-14.9\pm0.3$ & $-8.9\pm0.4$\\
+WOS-R chain $2{\times}7$ & 16 & 0 & 42 & 2.1 & $-20.5\pm0.1$ & $-11.3\pm0.3$ & $-16.5\pm1.7$ & $-16.4\pm0.3$ & $-11.1\pm0.4$\\
+WOS-R bank $C{=}4$ & 69 & 4 & 168 & 7.8 & $-20.8\pm0.5$ & $-12.1\pm0.5$ & $-17.4\pm1.1$ & $-17.9\pm0.2$ & $-12.4\pm0.4$\\
+WOS-R bank $C{=}8$ & 137 & 8 & 336 & 16.9 & $-21.1\pm0.6$ & $-12.4\pm0.6$ & $-17.8\pm0.9$ & $-18.2\pm0.4$ & $\mathbf{-12.7\pm0.4}$\\
+\quad ablation: bank $C{=}4$, ramp only & 69 & 4 & 168 & 7.8 & $-19.9\pm0.9$ & $-11.1\pm1.6$ & $-16.1\pm1.4$ & -- & --\\
+\quad ablation: bank $C{=}8$, ramp only & 137 & 8 & 336 & 16.9 & $-19.8\pm0.9$ & $-10.9\pm1.7$ & $-16.5\pm1.2$ & -- & --\\
+NEst bank $C{=}4$ & 117 & 60 & 168 & 3.7 & $-21.0\pm0.4$ & $-12.3\pm0.3$ & $\mathbf{-18.2\pm0.9}$ & $-18.5\pm0.2$ & $-12.5\pm0.3$\\
+CNN-S & 129 & 120 & 0 & 0.1 & $-15.0\pm0.7$ & $-8.3\pm0.2$ & $-9.4\pm0.9$ & $-19.1\pm0.3$ & $-11.3\pm0.3$\\
+CNN-M & 3\,857 & 3\,808 & 0 & 0.7 & $-19.4\pm0.4$ & $-12.9\pm1.0$ & $-14.6\pm0.6$ & $-20.4\pm0.3$ & $-12.1\pm0.6$\\
+CNN-L & 22\,081 & 21\,952 & 0 & 3.8 & $\mathbf{-22.3\pm0.6}$ & $\mathbf{-15.5\pm0.7}$ & $-17.4\pm0.0$ & $\mathbf{-20.4\pm0.2}$ & $-11.6\pm0.7$\\
+MLP (window 15) & 5\,249 & 5\,120 & 0 & 1.5 & $-19.9\pm0.3$ & $-12.9\pm0.5$ & $-15.0\pm0.1$ & $-19.7\pm0.3$ & $-12.5\pm0.4$\\
+Transformer & 4\,561 & 69\,728 & 0 & 141.0 & $-18.5\pm0.3$ & $-11.1\pm0.2$ & $0.3\pm0.3$ & $-16.5\pm0.3$ & $-9.6\pm0.4$\\
+\bottomrule\end{tabular}}\end{table*}

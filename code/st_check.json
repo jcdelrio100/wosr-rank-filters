@@ -1,0 +1,58 @@
+{
+ "P=4,I=0": {
+  "cascade": {
+   "violations": 0,
+   "max_excess": 0.0
+  },
+  "spatial": {
+   "violations": 0,
+   "max_excess": 0.0
+  },
+  "temporal": {
+   "violations": 398,
+   "max_excess": 200000.0
+  }
+ },
+ "P=4,I=12": {
+  "cascade": {
+   "violations": 0,
+   "max_excess": 0.0
+  },
+  "spatial": {
+   "violations": 133,
+   "max_excess": 1000000.0
+  },
+  "temporal": {
+   "violations": 398,
+   "max_excess": 200000.0
+  }
+ },
+ "P=0,I=16": {
+  "cascade": {
+   "violations": 0,
+   "max_excess": 0.0
+  },
+  "spatial": {
+   "violations": 133,
+   "max_excess": 1000000.0
+  },
+  "temporal": {
+   "violations": 0,
+   "max_excess": 0.0
+  }
+ },
+ "P=5,I=0": {
+  "cascade": {
+   "violations": 398,
+   "max_excess": 83300.0
+  },
+  "spatial": {
+   "violations": 398,
+   "max_excess": 83300.0
+  },
+  "temporal": {
+   "violations": 398,
+   "max_excess": 250000.0
+  }
+ }
+}

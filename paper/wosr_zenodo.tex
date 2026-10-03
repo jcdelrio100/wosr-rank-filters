@@ -1,0 +1,371 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,graphicx,xcolor,array,tabularx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,decorations.pathreplacing}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{caption}
+\usepackage[section]{placeins}
+\captionsetup{font=small}
+\usepackage[most]{tcolorbox}
+\newtcolorbox{keybox}[1]{colback=blue!4,colframe=blue!45!black,fonttitle=\bfseries\small,title={#1},boxrule=0.6pt,arc=2pt,left=4pt,right=4pt,top=3pt,bottom=3pt}
+\setlength{\parskip}{3pt}
+
+\title{\textbf{Train with Ramps, Deploy with Ranks}\\[4pt]
+\large Tiny, robust rank-order filters that compete with neural networks}
+\author{Juan Carlos del R{\'\i}o\thanks{Independent researcher, Madrid, Spain. \texttt{jcdelrio100@gmail.com}}}
+\date{October 2026 \quad (preprint)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A median filter removes impulsive noise by sorting a few neighbouring samples and picking the middle one. Filters of
+this family (\emph{rank-order} or \emph{order-statistic} filters) need no multiplications, cannot be thrown off by a few
+wild samples, and their output never moves more than their input does. They were popular in the 1980s and 1990s, but
+they are hard to \emph{train}: picking ``the third largest value'' does not change smoothly when the parameters change,
+so gradient descent gets no signal. We revisit a 1993 thesis on adaptive cascades of such filters with a simple idea:
+during training each sample is spread as a small \emph{ramp} between its sorted neighbours, which makes the output
+smooth; for deployment the ramp is removed and the model is an exact rank filter again. We compare the resulting models
+(WOS-R) with convolutional networks, multilayer perceptrons and Transformers on signals, images, radar detection and
+federated learning. With 16 to 213 parameters and almost no multiplications, WOS-R comes within 0.5--1.2\,dB of networks
+that are 160 to 1\,400 times larger, and it is clearly better when the noise changes in ways not seen during training.
+It is not a universal replacement: for Gaussian noise or operators that need subtraction, networks remain better.
+\end{abstract}
+
+\begin{center}\small
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{@{}lll@{}}
+\multicolumn{3}{@{}l}{\textbf{Abbreviations used throughout}}\\\midrule
+WOS: weighted order statistic & CNN: convolutional neural network & dB: decibel (log ratio)\\
+WOS-R: WOS trained with ramps & MLP: multilayer perceptron & SNR: signal-to-noise ratio\\
+NEst: the 1993 structure (Sec.~\ref{sec:nest}) & DnCNN: a standard denoising CNN & OOD: out of distribution\\
+\end{tabular}
+\end{center}
+
+%=====================================================================================================
+\section{Why look again at rank filters?}
+Neural networks dominate signal and image restoration today. They are accurate, but large (thousands to millions of
+parameters), multiplication-heavy, and they can fail badly when the data drift away from what they saw in training.
+Rank-order filters sit at the other end of the spectrum: tiny, multiplication-free and robust by construction, but
+hand-designed.
+
+In 1993 the author's telecommunications engineering thesis \cite{delrio1993}, supervised by P.~Salembier, studied how
+to \emph{adapt} cascades of two such filters from data. Its main lesson was that parameters which only decide
+\emph{which} sample is selected (a mask, a rank) cannot be adapted in a cascade, while parameters that change the
+\emph{values} being sorted can. Thirty years later, with modern automatic differentiation and optimisers, we asked
+two questions: can these structures now be trained well, and are they useful next to today's neural networks?
+
+\begin{keybox}{Main messages}
+\begin{enumerate}\itemsep0pt
+\item A small trick, the \emph{ramp}, makes rank filters trainable by gradient descent while the deployed model remains an
+  exact rank filter with all its guarantees (Sec.~\ref{sec:wosr}).
+\item Two layouts are useful: a \emph{cascade} (stages in series, zero multiplications) and a \emph{bank} (several
+  cascades in parallel, combined by a weighted sum) (Sec.~\ref{sec:arch}).
+\item On impulsive noise, radar detection and fault-tolerant learning, these models match or beat networks that are
+  hundreds of times larger, especially under conditions not seen in training (Sec.~\ref{sec:results}).
+\end{enumerate}
+\end{keybox}
+
+%=====================================================================================================
+\section{Rank-order filters in one page}
+Slide a short window over the signal (or a small square over the image), sort the samples inside it and output the
+sample found at a chosen position (rank). Figure~\ref{fig:median} shows the median: an impulse ends up at one end of
+the sorted list and is never selected. Choosing rank 1 gives the minimum (\emph{erosion}), the last rank gives the
+maximum (\emph{dilation}); chaining an erosion and a dilation gives an \emph{opening}, a classical shape filter
+\cite{pitas1990,maragos1989}.
+
+\begin{figure}[h]\centering
+\resizebox{\linewidth}{!}{\input{tikz/fig_median.tex}}
+\caption{A rank filter. The window is sorted and one rank is selected. The impulse (9.0) is ignored.}\label{fig:median}
+\end{figure}
+
+Three properties make these filters attractive in practice:
+\begin{itemize}\itemsep0pt
+\item \textbf{No multiplications}: only comparisons, which are cheap in hardware.
+\item \textbf{Robustness}: if any 2 of the 5 samples of a median filter are corrupted, however wildly, the output still
+  stays within the range of the clean samples. This tolerance (the \emph{breakdown point}) is known in advance.
+\item \textbf{Stability}: if the input changes by at most $\varepsilon$ everywhere, the output changes by at most
+  $\varepsilon$ (the filter is \emph{1-Lipschitz}). This holds for any chain of rank filters, however long.
+\end{itemize}
+Their weakness is design. The output jumps from one sample to another when a parameter crosses a threshold, so the
+derivative with respect to the parameters is zero almost everywhere and gradient descent cannot learn them.
+
+%=====================================================================================================
+\section{The 1993 structure: NEst}\label{sec:nest}
+The thesis proposed a trainable stage, called NEst, that avoids the zero-gradient problem (Fig.~\ref{fig:nest}).
+Each sample receives an offset $b_j$ before sorting, and the sorted values are combined with weights $h_k$:
+\[
+y_i=\sum_{k}|h_k|\,(z+b)_{(k)} ,
+\]
+where $(z+b)_{(k)}$ is the $k$-th smallest value of the window after adding the offsets. Because the offsets change the
+\emph{values}, the output varies smoothly with them, and the thesis adapted cascades of two NEst stages with the
+least-mean-squares (LMS) algorithm.
+
+\begin{figure}[h]\centering
+\resizebox{0.86\linewidth}{!}{\input{tikz/fig_nest.tex}}
+\caption{NEst stage (1993). Orange: offsets applied to window positions before sorting. Green: weights applied to the
+sorted values. With one weight equal to 1 and zero offsets it is a plain rank filter; with several weights it averages
+neighbouring ranks.}\label{fig:nest}
+\end{figure}
+
+Re-implemented today with exact gradients and the Adam optimiser, a NEst cascade reaches the noise floor on the thesis'
+own example in 7\,s instead of 20\,s. However, when asked to recover 16 randomly chosen two-stage rank cascades, it
+succeeds in only 2--3 of them: its parameters can imitate a rank filter only approximately.
+
+%=====================================================================================================
+\section{The proposal: WOS-R}\label{sec:wosr}
+\subsection{Repetitions instead of masks}
+We use the \emph{weighted order statistic} (WOS) filter \cite{brownrigg1984,yin1996}: each sample of the window is
+copied $w_j$ times before sorting, and the output is the sample found at a fraction $r$ of the sorted list
+(Fig.~\ref{fig:wosr}a,b). A large $w_j$ makes a position more influential; $w_j=0$ removes it; equal weights and
+$r=\tfrac12$ give the median; $r$ near 0 or 1 gives erosion or dilation. The weights may be real numbers: any real
+weights define the same filter as some set of integers. One stage with a 7-sample window has only 8 parameters.
+
+\begin{figure}[h]\centering
+\resizebox{\linewidth}{!}{\input{tikz/fig_wosr.tex}}
+\caption{One WOS-R stage. (a) Each sample carries a learned repetition weight. (b) At deployment the copies are exact
+and one position of the sorted list is selected. (c) During training the copies are spread as a ramp between the
+neighbouring sorted values.}\label{fig:wosr}
+\end{figure}
+
+\subsection{The ramp: smooth for training, exact for deployment}
+With exact copies, the output jumps between sample values when $r$ or $w$ change (blue curve in
+Fig.~\ref{fig:rampcurve}): zero gradient almost everywhere. During training we therefore replace the copies of each
+sample by a ramp that spans half the distance to its sorted neighbours (Fig.~\ref{fig:wosr}c). The output becomes a
+continuous, piecewise-linear function of the parameters (red curve), and ordinary gradient descent works. After
+training the ramp is switched off. The deployed model is again an exact rank filter, so the three properties of
+Section~2 hold for the model that is actually used.
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.52\linewidth]{figs/ramp_curve.pdf}
+\caption{Output of the stage of Fig.~\ref{fig:wosr} as the quantile $r$ changes: staircase at deployment, continuous
+ramp during training.}\label{fig:rampcurve}
+\end{figure}
+
+\subsection{Cascade or bank?}\label{sec:arch}
+Stages can be combined in two ways (Fig.~\ref{fig:arch}, Table~\ref{tab:arch}).
+
+\textbf{Cascade.} Stages are applied one after the other, as in the 1993 thesis. The output is always one of the input
+samples; the model uses no multiplications and keeps every guarantee. It can express openings, closings, medians of
+medians and any chain of weighted medians.
+
+\textbf{Bank.} $C$ small cascades run in parallel on the same input, and their outputs are combined by a weighted sum
+$y=\sum_c a_c\,y_c+b$. This costs $C$ multiplications per sample and buys expressiveness: the sum can subtract one
+operator from another (for instance identity minus opening, the \emph{top-hat}) or average several rank filters.
+Robustness is kept, but the stability bound becomes $\sum_c|a_c|$ instead of 1. One practical detail matters: a bank
+must be trained with the ramp \emph{gradually} reduced to zero during training. Otherwise the weighted sum learns to
+exploit the ramp itself, and the deployed bank can be very poor (20\,dB worse on a simple median).
+
+\begin{figure}[h]\centering
+\resizebox{0.95\linewidth}{!}{\input{tikz/fig_arch.tex}}
+\caption{The two layouts used in this work.}\label{fig:arch}
+\end{figure}
+
+\begin{table}[h]\centering\small
+\caption{Cascade versus bank (1D, 7-sample windows, two stages per chain).}\label{tab:arch}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+ & \textbf{Cascade} & \textbf{Bank of $C$ chains} \\\midrule
+Structure & stages in series & $C$ cascades in parallel + weighted sum \\
+Parameters & 16 & 69 ($C{=}4$), 137 ($C{=}8$) \\
+Multiplications per sample & 0 & $C$ \\
+Output & always one input sample & weighted combination of $C$ selected samples \\
+Guarantees & robustness, stability bound 1, no multiplications & robustness; stability bound $\sum_c|a_c|$ \\
+Can represent & medians, erosion/dilation, openings, weighted medians & the same, plus signed combinations (top-hat) and coarse averaging \\
+Training & ramp on, then switched off & ramp reduced gradually to zero \\
+Error on 1D impulses & $-18.7\pm1.3$\,dB over 20 trainings (best $-20.7$) & $-21.1\pm0.5$\,dB over 6 trainings ($C{=}8$)\\
+Sensitivity to initialisation & high: use a few restarts & low \\
+\bottomrule\end{tabularx}
+\end{table}
+
+%=====================================================================================================
+\section{How does it compare with neural networks?}\label{sec:results}
+We ran five tests on a 2-core CPU, comparing WOS-R with residual CNNs (small, medium and large), MLPs and small
+Transformers trained on the same data with the same loss. Table~\ref{tab:summary} gives the headline numbers; full
+tables are in the Appendix.
+
+\begin{itemize}\itemsep1pt
+\item \textbf{B1 -- 1D signals with impulses.} Error in dB (lower is better; $-20$\,dB means the remaining error has 1\,\%
+  of the signal energy). The best bank ($-21.1$\,dB, 137 parameters) is 1.2\,dB behind the best CNN (22\,081
+  parameters). A single 16-parameter cascade is less reliable: $-18.7\pm1.3$\,dB over 20 independent trainings; keeping
+  the best of 4 short restarts (chosen on validation data) gives $-19.6$\,dB, on a par with a 3\,857-parameter CNN
+  ($-19.4$\,dB). When the impulses become twice
+  as large as in training, the rank models degrade least and the Transformer breaks down.
+\item \textbf{B2 -- What can each model represent?} We asked every model to imitate eleven known operators. When WOS-R
+  finds a rank-type target it reproduces it \emph{exactly}, which no network does; it cannot represent operators that need
+  subtraction or squaring, which networks learn easily (Fig.~\ref{fig:b2}).
+\item \textbf{B3 -- Images with salt-and-pepper noise.} Quality in PSNR (peak signal-to-noise ratio, dB, higher is
+  better) on 68 standard test photographs. A \emph{switching} WOS-R, applied only to pixels that look like impulses, uses
+  52 parameters and is 0.5\,dB behind a 74\,593-parameter DnCNN at 50\,\% corrupted pixels. With a different kind of
+  impulse never seen in training, the plain WOS-R is 5.6--6.7\,dB \emph{better} than the DnCNN (Fig.~\ref{fig:qual}).
+\item \textbf{B4 -- Radar detection.} A constant-false-alarm-rate (CFAR) detector decides whether a target is present
+  from the surrounding range cells. A 34-parameter WOS-R is the best detector whenever other targets contaminate those
+  cells; an MLP loses up to 4.3\,dB and a Transformer stops detecting. Without interferers, the MLP is 0.3\,dB better.
+\item \textbf{B5 -- Federated learning with faulty nodes.} Twenty devices train a shared model and four send corrupted
+  updates. A cascade of rank operations over time and over nodes keeps 75\,\% accuracy in the worst case (54\,\% when the
+  devices hold very different data); a learned
+  aggregator alone collapses to chance (10\,\%), but works well \emph{after} the rank cascade.
+\end{itemize}
+
+\begin{table}[t]\centering\small
+\caption{Headline results: best WOS-R against the best network in each test (from the Appendix tables).}\label{tab:summary}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{3.1cm}lrlr>{\raggedright\arraybackslash}X@{}}\toprule
+Test & WOS-R (params) & score & Network (params) & score & Verdict\\\midrule
+B1 impulses, 1D (dB, $\downarrow$) & bank (137) & $-21.1$ & CNN (22\,081) & $-22.3$ & 161$\times$ smaller, 1.2\,dB worse\\
+B1 impulses $\times2$ (OOD) & bank (137) & $-17.8$ & CNN (22\,081) & $-17.4$ & WOS-R better; Transformer fails ($+0.3$)\\
+B1 Gaussian noise & bank (137) & $-18.2$ & CNN (22\,081) & $-20.4$ & network better\\
+B3 salt \& pepper 50\,\% (PSNR, $\uparrow$) & switching (52) & 26.22 & DnCNN (74\,593) & 26.74 & 1\,434$\times$ smaller, 0.5\,dB worse\\
+B3 random impulses (OOD) & cascade (52) & 24.46 & DnCNN (74\,593) & 17.74 & WOS-R +6.7\,dB\\
+B4 radar, 8 interferers (SNR needed, $\downarrow$) & WOS-R (34) & 17.09 & MLP (6\,337) & 20.35 & WOS-R +3.3\,dB\\
+B5 federated, worst case (accuracy) & rank cascade (0) & 0.753 & learned (5\,569) & 0.100 & learned only works after a rank cascade\\
+\bottomrule\end{tabularx}
+\end{table}
+
+\paragraph{Benchmark dashboards.} Figures~\ref{fig:bench1d}--\ref{fig:benchacc} show, for every model, the residual
+error in the training conditions and in unseen conditions, the number of parameters, the multiplications per output, the
+CPU latency, the training curves and the time needed to converge. Colour marks the family: blue for rank-based models,
+orange for neural networks, green for classical filters. Three observations stand out. First, the rank models sit at
+the left of every cost axis (16--213 parameters, 0--8 multiplications) while staying within about 1\,dB of the best
+network in the training conditions. Second, their error moves least when the conditions change (short segments in
+Figs.~\ref{fig:bench1d}a and \ref{fig:benchimg}a). Third, they converge in 15--90\,s: WOS-R starts as a median
+filter, which is already a reasonable denoiser, so its training curve starts low (Fig.~\ref{fig:bench1d}e). Their
+latency in PyTorch is not lower than that of small CNNs, because sorting is not what CPUs and deep-learning libraries
+are optimised for.
+
+\begin{figure}[p]\centering
+\includegraphics[width=\linewidth]{figs/bench_1d.pdf}
+\caption{1D impulsive denoising (B1). (a) Residual error (normalised mean squared error, NMSE; lower is better) in
+training conditions (o) and with impulses twice as large (x). (b) Parameters. (c) Multiplications per output sample.
+(d) CPU latency. (e) Error of the deployed model during training against training time (3 runs). (f) Time until the
+error stays within 0.5\,dB of its final value.}\label{fig:bench1d}
+\end{figure}
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/bench_img.pdf}
+\caption{Image impulse denoising on 68 test photographs (B3). (a) Image quality (PSNR, higher is better) with 50\,\%
+salt-and-pepper pixels (o, seen in training) and 40\,\% random-valued impulses (x, never seen). (b) Parameters. (c) CPU
+latency per $512{\times}512$ image. (d) Training time.}\label{fig:benchimg}
+\end{figure}
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/bench_acc.pdf}
+\caption{Accuracy in the two decision tasks. (a) Radar detection (B4): signal-to-noise ratio needed to detect half of
+the targets as interfering targets are added (lower is better; the Transformer never reaches 50\,\% with interferers).
+(b) Federated learning (B5): worst test accuracy over seven types of faulty devices.}\label{fig:benchacc}
+\end{figure}
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{figs/qual.pdf}
+\caption{Image test (``boat'', crop). Top: 50\,\% salt-and-pepper pixels (seen in training). Bottom: 40\,\% random-valued
+impulses (never seen). AMF is the classical adaptive median filter. Numbers are PSNR of the full image.}\label{fig:qual}
+\end{figure}
+
+\paragraph{Cost.} The savings are in operations: 0 to 8 multiplications per sample instead of 6\,000--74\,000, replaced
+by a few hundred comparisons. With standard PyTorch code, which is optimised for convolutions, WOS-R is not faster on a
+CPU (1.1--4.5 times slower); the gain would come from comparator hardware such as FPGAs or low-power DSPs.
+
+%=====================================================================================================
+\section{Are stages and window size hyper-parameters?}\label{sec:struct}
+In the experiments above they were fixed by hand (for instance 2 stages of 7 samples). They do not have to be: the
+\emph{maximum} depth, window and bank size are hyper-parameters, but the structure actually used can be learned during
+training without leaving the rank-filter family, because every unnecessary piece has a natural ``off'' state:
+\begin{itemize}\itemsep0pt
+\item a \textbf{stage} becomes the identity when the weight of its centre sample exceeds the larger of $r$ and $1-r$
+  (the centre is then always selected), so it can simply be removed;
+\item a \textbf{tap} disappears when its repetition weight goes to zero, which shortens the window;
+\item a \textbf{chain} of a bank disappears when its mixing weight $a_c$ goes to zero.
+\end{itemize}
+We trained an over-sized cascade (4 stages of 9 samples, extra stages starting as the identity) with two small
+penalties that push stages towards the identity and weights towards zero, then removed every stage and tap whose
+removal did not change the error on separate validation data (Table~\ref{tab:struct}).
+
+\begin{table}[h]\centering\small
+\caption{Structure learned from an over-sized cascade (4 stages $\times$ 9 samples). Error above the best achievable,
+in dB; 2 training runs per target (3 for B1).}\label{tab:struct}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+Target & True structure & Learned structure & Result\\\midrule
+Median of 7 & 1 stage, 7 samples & 1 stage, 7 samples (all runs) & exact (0.0\,dB)\\
+Opening (erosion$\to$dilation) & 2 stages of 5 & 3--4 smaller stages, equivalent & exact in 3 of 4 runs; the fixed 2$\times$7 cascade never found it\\
+Rank cascade \#1 & median of 5, then erosion of 3 & 2 stages, the second an erosion of 3 & exact in 2 of 4 runs\\
+1D impulses (B1) & unknown & 1--2 stages, 10--16 parameters & $-19.1$\,dB (fixed 2$\times$7: $-18.7$)\\
+Bank of 8 chains (B1) & unknown & 6--7 chains kept & no loss ($-20.8$\,dB)\\
+\bottomrule\end{tabularx}
+\end{table}
+
+\begin{figure}[h]\centering
+\includegraphics[width=0.48\linewidth]{figs/struct_grid.pdf}
+\caption{Hand-tuning the same two hyper-parameters: error of a WOS-R cascade on 1D impulses for every combination of
+depth and window (darker is better).}\label{fig:grid}
+\end{figure}
+
+Two lessons follow. The structure can be learned: the median and the second stage of cascade \#1 are recovered
+exactly, and the B1 model shrinks to 1--2 stages without losing accuracy. More surprisingly, \emph{starting larger
+helps the optimiser}: the opening, which the fixed 2-stage cascade never found, is found by the over-sized one as an
+equivalent chain of smaller filters. For comparison, a plain grid search over depth and window
+(Fig.~\ref{fig:grid}) costs 16 trainings (one per configuration) and still depends on luck: deeper cascades started at random get worse, and a
+single 2$\times$7 cascade varies by up to 4\,dB between runs. Since one training takes about 20\,s, the practical recipe
+is: start over-sized with extra stages at the identity, prune, and keep the best of a few restarts.
+
+%=====================================================================================================
+\section{When should you use it?}
+\begin{table}[h]\centering\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+\textbf{WOS-R is a good choice} & \textbf{A neural network is a better choice}\\\midrule
+impulsive or heavy-tailed noise, especially of unknown size or type & Gaussian noise at the level seen in training\\
+radar detection with interfering targets & more corrupted samples than the filter can tolerate\\
+robust aggregation of data from unreliable sources (as a front-end) & operators that need subtraction or squaring\\
+very small budgets: ${<}\,250$ parameters, almost no multiplications & highest possible accuracy with GPU training\\
+\bottomrule\end{tabularx}
+\end{table}
+
+A practical recipe that emerges from the tests is \emph{rank first, learn second}: a WOS-R cascade bounds the influence
+of corrupted inputs, and a small learned model placed after it adds accuracy.
+
+\paragraph{Limitations.} All training ran on a CPU, images used a single training run per model, and the networks are
+smaller and less trained than published GPU models, so their accuracy in the training conditions is underestimated.
+The radar data are simulated. Training does not always find the best rank filter: a fixed two-stage cascade recovered
+9 of 16 random cascades (against 2--3 for NEst), and a single cascade is sensitive to its random start
+(Sec.~\ref{sec:struct}); banks and over-sized cascades are much more reliable.
+
+\section{Conclusion}
+A forty-year-old family of filters becomes trainable with a simple device: let each sample be a ramp while learning,
+and a single sample when deployed. The resulting models are tiny, need almost no multiplications, keep provable
+robustness, and hold their own against neural networks hundreds of times larger, above all when the data change. They
+are not general approximators; combining them with small linear or learned stages is the natural next step.
+
+\paragraph{Code and data.} All code, result files and a detailed technical version of this work are available with
+this preprint.
+
+\paragraph{Acknowledgement.} To Philippe Salembier, who supervised the 1993 thesis that started this work.
+
+\bibliographystyle{unsrtnat}
+\bibliography{refs}
+
+%=====================================================================================================
+\clearpage
+\appendix
+\section{Detailed results}
+Abbreviations in the tables: SP salt-and-pepper; RVIN random-valued impulse noise; OOD out of distribution; NMSE
+normalised mean squared error; PSNR peak signal-to-noise ratio; SSIM structural similarity (0--1, higher is better);
+AMF adaptive median filter; CNN-S/M/L small/medium/large CNN; CFAR constant false-alarm rate; $P_d$, $P_{fa}$
+probability of detection / false alarm; CW coordinate-wise; NNM nearest-neighbour mixing; AMO adaptive minimax ordered
+weighted average; Med$_t$3 temporal median of the last 3 updates; ALIE ``a little is enough'' attack; IPM inner-product
+manipulation attack; SDC silent data corruption. Mults and Comps: multiplications and comparisons per output sample.
+``Ramp only'' rows are banks trained without the gradual reduction of the ramp (Sec.~\ref{sec:arch}).
+
+\input{tables/b1.tex}
+\input{tables/b2.tex}
+\begin{figure}[h]\centering\includegraphics[width=0.62\linewidth]{figs/b2_coverage.pdf}
+\caption{B2: how far each model stays from each target operator (dB above the best achievable; green represented,
+red not represented).}\label{fig:b2}\end{figure}
+\input{tables/b3_bsd68.tex}
+\input{tables/b4.tex}
+\input{tables/b5.tex}
+
+\end{document}

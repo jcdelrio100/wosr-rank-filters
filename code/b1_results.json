@@ -1,0 +1,248 @@
+[
+ {
+  "name": "tesis E1: max{0,2,4,5}\u2192min{0,1,4,6}",
+  "support": 11,
+  "basis": 27,
+  "sizes": [
+   2,
+   3,
+   4
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 324
+ },
+ {
+  "name": "min\u2192max (apertura plana 5)",
+  "support": 9,
+  "basis": 5,
+  "sizes": [
+   5
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 45
+ },
+ {
+  "name": "mediana5\u2192mediana5",
+  "support": 9,
+  "basis": 37,
+  "sizes": [
+   3,
+   4,
+   5,
+   6
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 333
+ },
+ {
+  "name": "mediana7 sola",
+  "support": 7,
+  "basis": 35,
+  "sizes": [
+   4
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 245
+ },
+ {
+  "name": "E2 t=0",
+  "support": 7,
+  "basis": 1,
+  "sizes": [
+   7
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 12
+ },
+ {
+  "name": "E2 t=1",
+  "support": 10,
+  "basis": 40,
+  "sizes": [
+   4,
+   5,
+   6,
+   7
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 400
+ },
+ {
+  "name": "E2 t=2",
+  "support": 9,
+  "basis": 9,
+  "sizes": [
+   1
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 108
+ },
+ {
+  "name": "E2 t=3",
+  "support": 7,
+  "basis": 7,
+  "sizes": [
+   1,
+   2
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 63
+ },
+ {
+  "name": "E2 t=4",
+  "support": 11,
+  "basis": 11,
+  "sizes": [
+   1,
+   2
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 121
+ },
+ {
+  "name": "E2 t=5",
+  "support": 11,
+  "basis": 37,
+  "sizes": [
+   2,
+   3,
+   4
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 444
+ },
+ {
+  "name": "E2 t=6",
+  "support": 11,
+  "basis": 105,
+  "sizes": [
+   3,
+   4,
+   5
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 1155
+ },
+ {
+  "name": "E2 t=7",
+  "support": 8,
+  "basis": 3,
+  "sizes": [
+   5,
+   6
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 27
+ },
+ {
+  "name": "E2 t=8",
+  "support": 9,
+  "basis": 16,
+  "sizes": [
+   5,
+   6,
+   7
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 144
+ },
+ {
+  "name": "E2 t=9",
+  "support": 11,
+  "basis": 63,
+  "sizes": [
+   3,
+   4,
+   5,
+   6
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 819
+ },
+ {
+  "name": "E2 t=10",
+  "support": 12,
+  "basis": 152,
+  "sizes": [
+   5,
+   6,
+   7,
+   8
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 1976
+ },
+ {
+  "name": "E2 t=11",
+  "support": 6,
+  "basis": 10,
+  "sizes": [
+   3
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 70
+ },
+ {
+  "name": "E2 t=12",
+  "support": 11,
+  "basis": 13,
+  "sizes": [
+   1,
+   2
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 143
+ },
+ {
+  "name": "E2 t=13",
+  "support": 7,
+  "basis": 7,
+  "sizes": [
+   1,
+   2
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 56
+ },
+ {
+  "name": "E2 t=14",
+  "support": 10,
+  "basis": 6,
+  "sizes": [
+   6,
+   7
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 72
+ },
+ {
+  "name": "E2 t=15",
+  "support": 7,
+  "basis": 7,
+  "sizes": [
+   1
+  ],
+  "maxerr": 0.0,
+  "nest_params": 28,
+  "erosion_bank_params": 56
+ }
+]

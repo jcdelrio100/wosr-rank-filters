@@ -1,0 +1,8 @@
+# tested with Python 3.11
+torch>=2.1
+numpy>=1.26
+scipy>=1.11
+matplotlib>=3.8
+scikit-image>=0.22
+pillow>=10.0
+cvxpy>=1.4        # only for the minimax OWA library (code/robust.py, code/amo.py)

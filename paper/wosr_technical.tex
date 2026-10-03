@@ -1,0 +1,517 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,multirow,graphicx,xcolor,array}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{caption}
+\captionsetup{font=small}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[proposition]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[proposition]{Remark}
+\newcommand{\OWA}{\operatorname{OWA}}
+\newcommand{\WOS}{\operatorname{WOS}}
+\newcommand{\R}{\mathbb{R}}
+
+\title{Train with Ramps, Deploy with Ranks:\\
+Learnable Weighted Order Statistic Cascades as Tiny, Robust,\\ Multiplication-Free Alternatives to Neural Networks}
+\author{Juan Carlos del R{\'\i}o\thanks{Independent researcher, Madrid, Spain. \texttt{jcdelrio100@gmail.com}}}
+\date{October 2026 \quad (preprint)}
+
+\let\svthefootnote\thefootnote
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Order-statistic filters are increasing, 1-Lipschitz in $\ell_\infty$, have explicit breakdown points and need no
+multiplications, but they are hard to train because a selection is piecewise constant in its parameters. We parameterise
+cascades of flat weighted order statistic (WOS) filters by real repetition weights and a quantile, train them through a
+\emph{ramp} relaxation that spreads each sample's mass between its rank neighbours, which gives exact, non-vanishing
+gradients without temperatures, and deploy the \emph{exact} WOS cascade, so every guarantee holds for the deployed model.
+When a linear read-out follows the selections, annealing the ramp to the hard selection during training is necessary.
+We benchmark the resulting models (WOS-R) against residual convolutional neural networks (CNNs), multilayer perceptrons (MLPs) and small Transformers on five
+problems, reporting
+accuracy, operator coverage and cost. With 16--137 parameters and at most 8 multiplications per sample, WOS-R comes
+within 1.2\,dB of a 22k-parameter CNN on 1D impulsive restoration and beats it when the impulse amplitude doubles, where
+a Transformer breaks down. On the BSD68 natural-image test set, a switching WOS-R with 52 parameters is 0.5\,dB behind a 75k-parameter denoising CNN
+(DnCNN) at
+50\,\% salt-and-pepper noise, and plain WOS-R cascades are 5.6--6.7\,dB ahead of it on random-valued impulses never seen in
+training. In radar constant-false-alarm-rate (CFAR) detection, a 34-parameter WOS-R is the best detector in the presence of interfering targets, where an
+MLP loses up to 4.3\,dB and a Transformer never reaches a detection probability $P_d=0.5$. In federated aggregation, robustness comes from rank
+cascades, not from learned aggregators. The coverage study delineates the class: at 35\,dB signal-to-noise ratio (SNR) the deployed WOS-R recovers median, erosion and
+weighted-WOS operators exactly, where all networks remain 5--27\,dB above the noise floor; it fails by construction on
+signed linear and level-dependent operators, and ramp training does not always find representable two-stage cascades.
+\end{abstract}
+
+%=====================================================================================================
+\section{Introduction}
+\let\thefootnote\relax\footnotetext{Abbreviations are expanded at first use and listed in Appendix~\ref{app:abbr}.}\addtocounter{footnote}{0}\let\thefootnote\svthefootnote
+Rank-order (order-statistic) filters---median, erosion/dilation, weighted medians, stack filters---were a mainstay of
+nonlinear signal processing in the 1980s and 1990s because they remove impulses while preserving edges, are
+translation invariant and need no multiplications \cite{pitas1990,wendt1986stack,yin1996}. A recurring difficulty was
+\emph{design}: superposition does not apply, and early adaptive schemes relied on least-mean-squares (LMS) stochastic gradients through
+implicit formulations of the rank operation \cite{salembier1992,pitas1991,ropert1994}. In 1993 the author studied the
+adaptation of \emph{cascades} of two order filters \cite{delrio1993}, a problem that is harder than adapting a single
+filter because the composition is not reducible to one filter, as it is in the linear case. That work showed that
+structures whose parameters act only on the \emph{index} of the selected sample (a binary mask and a rank) cannot be
+adapted in cascade, and that structures in which parameters enter the \emph{value} of the selected sample can.
+
+Three decades later, deep networks dominate signal and image restoration, and the questions have changed: how
+\emph{small}, \emph{robust} and \emph{cheap} can a learned model be, and what guarantees does it keep? Order-statistic
+models are attractive in this regard. They are Lipschitz by construction, they have explicit breakdown points, they
+can be implemented with comparators only, and their parameters are interpretable. Their weakness remains
+trainability: a selection operator is piecewise constant in its parameters, so gradients vanish almost everywhere.
+This is the same ``gradient sparsity'' recently identified for morphological networks \cite{dimitrova2026}.
+
+\paragraph{This paper.} We revisit that problem with modern tools and propose a simple recipe, \emph{train with ramps,
+deploy with ranks} (WOS-R):
+\begin{enumerate}
+\item We parameterise each stage as a flat weighted order statistic (WOS) filter, i.e.\ a filter in which each sample
+  of the window enters the sorted list with a real-valued \emph{repetition count} $w_j\ge0$, together with a quantile
+  $r$ (Section~\ref{sec:wos}). This is the classical weighted median/WOS family \cite{brownrigg1984,yliharja1991,yin1996},
+  and we make its expressiveness precise for cascades.
+\item During training only, we replace each repetition by a \emph{ramp} that spreads the sample's mass between the
+  mid-points to its rank neighbours (Section~\ref{sec:ramp}). The resulting quantile is continuous and piecewise linear
+  in $(w,r)$, so exact gradients exist everywhere without temperatures, straight-through estimators \cite{bengio2013ste}
+  or soft sorting \cite{grover2019,blondel2020,petersen2021}. At deployment the ramp is removed and the model is an
+  \emph{exact} cascade of selections, so all the guarantees of rank filters apply to the model that is actually used.
+\item We benchmark WOS-R against residual convolutional neural networks (CNNs, in the style of the denoising CNN DnCNN
+  \cite{zhang2017dncnn}), multilayer perceptrons (MLPs) and small Transformers \cite{liu2021swin} on five problems: 1D impulsive restoration, an operator-coverage matrix (system identification),
+  image impulse denoising on the standard Set12 and BSD68 (Berkeley segmentation dataset, 68 images) test sets
+  \cite{martin2001bsd}, radar constant-false-alarm-rate (CFAR) detection in K-distributed sea clutter
+  \cite{rohling1983,ward2013}, and Byzantine/fault-robust aggregation in federated learning (FL; training distributed over nodes, some of them
+  faulty or malicious) \cite{yin2018byz,karimireddy2021,allouah2023}. We report accuracy, \emph{coverage} (which operator classes each model
+  can and cannot represent) and cost: parameters, multiplications and comparisons per output sample, and CPU latency.
+\end{enumerate}
+
+\paragraph{Contributions.}
+(i) A training recipe for exact WOS cascades: repetition weights plus a ramp relaxation used only during training, with
+ramp continuation when a linear read-out follows (Sections~\ref{sec:wos}--\ref{sec:ramp}).
+(ii) Properties of the deployed model: integer equivalence, class-$\mathcal O$ Lipschitz bound independent of depth,
+breakdown point as a function of the repetitions, and a Matheron--Maragos test of when a cascade collapses to one WOS.
+(iii) A benchmark of accuracy, coverage and cost against CNN, MLP and Transformer baselines on five problems, with all
+code and result files (Section~\ref{sec:results}).
+(iv) A delimitation of where order-statistic models are preferable---impulsive and heavy-tailed contamination,
+out-of-distribution amplitudes and contamination types, interference-limited detection, Byzantine aggregation, and
+multiplication-free hardware---and where they are not---Gaussian noise in distribution, signed linear operators and
+contamination rates beyond the design breakdown point (Section~\ref{sec:disc}).
+
+%=====================================================================================================
+\section{Related work}
+\paragraph{Order-statistic and stack filters.} Weighted median and WOS filters \cite{brownrigg1984,yin1996} are stack
+filters \cite{wendt1986stack} whose Boolean function is a threshold function \cite{yliharja1991}. Arce's weighted
+median admits negative weights \cite{arce1998}. Adaptive design used LMS-type or sigmoidal approximations
+\cite{salembier1992,pitas1991,ropert1994,yin1996} and, later, support vector machines (SVMs) on the threshold decomposition \cite{yao2006}.
+Salembier's adaptive rank-order filters \cite{salembier1992} and their cascades \cite{delrio1993} are the direct
+ancestors of this work.
+\paragraph{Morphological and tropical networks.} Morphological perceptrons \cite{ritter1996,charisopoulos2017}, smooth
+morphological layers \cite{hermary2022}, sparse hybrid linear--morphological networks \cite{fotopoulos2025} and the tropical
+view of ReLU networks \cite{zhang2018tropical} relate max-plus algebra to deep learning. Training difficulties are
+attributed to gradient sparsity and initialisation sensitivity \cite{dimitrova2026}. Sorting-based activations also
+yield Lipschitz networks \cite{anil2019}.
+\paragraph{Differentiable sorting.} NeuralSort \cite{grover2019}, projection-based soft sort/rank \cite{blondel2020} and
+differentiable sorting networks \cite{petersen2021} relax \emph{permutations}. Our ramp relaxes the \emph{quantile of a
+weighted empirical distribution}, is exact at deployment ($\beta=0$), and leaves the sorting itself hard.
+\paragraph{Robust aggregation and CFAR.} Coordinate-wise median and trimmed mean \cite{yin2018byz}, Krum
+\cite{blanchard2017}, centred clipping \cite{karimireddy2021} and nearest-neighbour mixing \cite{allouah2023} are
+order-statistic aggregators facing attacks such as ``a little is enough'' (ALIE, small coordinated shifts hidden within
+the honest spread) \cite{baruch2019} and inner-product manipulation (IPM, updates that reverse the sign of the honest
+mean's inner product) \cite{xie2019ipm}. Order-statistic CFAR (OS-CFAR, threshold from the $k$-th ranked reference cell)
+\cite{rohling1983} and its greatest-of/smallest-of (GO/SO) variants \cite{gandhi1988} are rank-filter detectors.
+
+%=====================================================================================================
+\section{Weighted order statistic cascades}\label{sec:wos}
+\subsection{Definitions}
+Let $z\in\R^m$ be the window of a signal or image around the current sample, $w\in\R_{\ge0}^m$ the repetition weights,
+$W=\sum_jw_j$ and $r\in(0,1)$. The WOS output is the lower weighted $r$-quantile
+\begin{equation}\label{eq:wos}
+\WOS_{w,r}(z)=\min\Big\{z_{(k)}:\ \textstyle\sum_{j:\,z_j\le z_{(k)}}w_j\ \ge\ rW\Big\}.
+\end{equation}
+For $w\in\mathbb N^m$ this is exactly ``sort the list in which $z_j$ appears $w_j$ times and take position $\lceil rW\rceil$''.
+$w_j=0$ removes the tap (a mask); $w\equiv1$ gives the rank filters, and $r\to0$, $r\to1$ give erosion and dilation.
+A WOS-R model is a \emph{cascade} of WOS stages, or a \emph{bank} of $C$ cascades combined by an affine mix
+$y=\sum_c a_cy_c+b$. The mix contributes the only $C$ multiplications per output sample.
+
+\subsection{Properties}
+\begin{proposition}[repetitions, thresholds and integers]\label{prop:thr}
+(i) $(\lambda w,r)$ and $(w,r)$ define the same filter for all $\lambda>0$.
+(ii) By threshold decomposition, $\WOS_{w,r}(z)\ge t$ iff $\sum_{j:z_j\ge t}w_j>(1-r)W$: a positive threshold Boolean function.
+(iii) Every real-weight WOS equals an integer-weight WOS, because there are finitely many threshold functions of $m$ variables.
+\end{proposition}
+
+\begin{proposition}[class $\mathcal O$ and Lipschitz]\label{prop:lip}
+Every flat WOS cascade (and every cascade of ordered weighted averages, OWA $\sum_kw_kz_{(k)}$, including the 1993
+NEst structure $\sum_k|h_k|(z+b)_{(k)}$, with weights in the simplex) is increasing, commutes with translations
+and satisfies $\Psi(z+c)=\Psi(z)+c$. Consequently $\|\Psi(x)-\Psi(y)\|_\infty\le\|x-y\|_\infty$, independently of depth.
+\end{proposition}
+\begin{proof}
+If $x\le y+\delta$, then $\Psi x\le\Psi(y+\delta)=\Psi y+\delta$; exchange $x$ and $y$.
+\end{proof}
+
+\begin{proposition}[breakdown]\label{prop:bp}
+A set $S$ of arbitrarily corrupted window samples can drive $\WOS_{w,r}$ to $\pm\infty$ iff
+$w(S)\ge\min\{\lceil rW\rceil,\,W-\lceil rW\rceil+1\}$. Boosting the weight of a position therefore \emph{reduces} the
+number of corrupted samples needed: for a 5-point median with centre weight 3, two samples suffice instead of three.
+\end{proposition}
+
+\begin{proposition}[Matheron--Maragos basis]\label{prop:basis}
+Every flat cascade is $\Psi z=\max_{B\in\mathcal B}\min_{b\in B}z_b$, where $\mathcal B$ is the set of minimal true sets
+of its Boolean function \cite{matheron1975,maragos1989}. A rank-$r$ filter of $m$ samples needs $\binom{m}{m-r+1}$
+erosions, against $m{+}1$ WOS parameters. A cascade is a single WOS iff its Boolean function is a threshold function;
+a mixed-integer linear program on the truth table decides this and returns the minimal integer repetitions.
+\end{proposition}
+On the 20 two-stage cascades used in our experiments, 8 are single WOS (verified with zero error), while openings,
+median-of-medians and the cascade studied in 1993 are not. This motivates cascades and banks.
+
+%=====================================================================================================
+\section{The ramp relaxation}\label{sec:ramp}
+\begin{definition}[ramp WOS]
+Sort $z$ and let $m_k^-=z_{(k)}-\beta\frac{z_{(k)}-z_{(k-1)}}2$ and $m_k^+=z_{(k)}+\beta\frac{z_{(k+1)}-z_{(k)}}2$
+(extremes are not extended), with $\beta\in[0,1]$. Sample $k$ carries mass $w_{(k)}$ spread uniformly over
+$[m_k^-,m_k^+]$. The ramp-WOS output is the $r$-quantile of this piecewise-linear distribution:
+\begin{equation}\label{eq:ramp}
+y=m^-_{k^*}+\frac{rW-C_{k^*-1}}{w_{(k^*)}}\,\big(m^+_{k^*}-m^-_{k^*}\big),\qquad k^*=\min\{k:C_k\ge rW\},\quad C_k=\textstyle\sum_{i\le k}w_{(i)}.
+\end{equation}
+The integer version places $w_{(k)}$ equispaced points in $[m_k^-,m_k^+]$; for example $(0,1),(0.5,3),(1,1)$ yields the
+list $[0,\,0.25,\,0.5,\,0.75,\,1]$.
+\end{definition}
+
+\begin{proposition}\label{prop:ramp}
+(i) $\beta=0$ recovers \eqref{eq:wos} exactly.
+(ii) For $\beta=1$ the cells tile $[z_{(1)},z_{(m)}]$, so $y$ is continuous and piecewise linear in $(w,r)$, with
+$\partial y/\partial r$ and $\partial y/\partial w$ defined almost everywhere and non-zero on a set of positive measure.
+(iii) With uniform weights and $r=\tfrac12$ (odd $m$), the ramp median is the L-filter $\tfrac14z_{(k-1)}+\tfrac12z_{(k)}+\tfrac14z_{(k+1)}$.
+(iv) With non-uniform weights, the ramp is \emph{not} continuous in $z$: swapping two samples with different weights
+re-assigns cells. It is neither increasing nor 1-Lipschitz, and its breakdown point drops by one rank neighbour.
+\end{proposition}
+Property (iv) is why we use the ramp \emph{only for training}. The deployed model ($\beta=0$) is an exact WOS cascade and
+satisfies Propositions~\ref{prop:lip}--\ref{prop:basis}. Table~\ref{tab:props} quantifies (ii) and (iv).
+
+\input{tables/props.tex}
+
+\begin{remark}[ramp continuation for linear read-outs]\label{rem:cont}
+For a pure cascade, the ramp's interpolation error is a common-mode bias that the discrete parameters cannot absorb, and
+the deployed selection snaps to the right order statistic: in our coverage experiment the ramp-trained chain has an
+excess error of 18.5--21.6\,dB at $\beta=1$ and 0.0\,dB \emph{after deployment} on every single-WOS target
+(Table~\ref{tab:b2}). When a linear layer follows the selections (the affine mix of a bank), the mix can co-adapt to the
+ramp, combining slightly different quantiles into an interpolation that disappears at $\beta=0$; a ramp-only bank then
+misses even a 7-point median by 20\,dB. Annealing $\beta$ linearly from 1 to 0 during training (we use the first 70\,\% of
+the steps) removes the effect; refitting the mix by least squares after training does not, because the chains
+themselves have co-adapted. We therefore train chains with $\beta=1$ and banks with this ramp continuation.
+\end{remark}
+
+\paragraph{Why it helps.} With the exact WOS, $\partial y/\partial w=\partial y/\partial r=0$ almost everywhere. The
+straight-through alternative uses the gradient of a temperature-smoothed cumulative distribution function (CDF) evaluated at the hard output; the soft
+alternative anneals a temperature. The ramp provides the exact gradient of a nearby continuous model whose distance to
+the deployed WOS is bounded by half the local spacing of the order statistics.
+
+%=====================================================================================================
+\section{Experimental protocol}\label{sec:proto}
+All experiments run on a 2-core CPU with PyTorch. WOS-R stages are trained with Adam ($\eta=0.03$, cosine schedule) at
+$\beta=1$ (banks: $\beta$ annealed $1\to0$ over the first 70\,\% of the steps, Remark~\ref{rem:cont}) and evaluated at
+$\beta=0$; baselines use Adam ($\eta=10^{-3}$ or $2\cdot10^{-3}$) with the same data, loss
+(mean squared error, MSE) and number of steps. ``Mults'' counts multiply--accumulates per output sample (attention included),
+``Comps'' counts comparisons for sorting (bound $m\lceil\log_2m\rceil$ per stage), and latency is single-threaded CPU
+time. Exact configurations are listed in Appendix~\ref{app:hyper}; the code and all result files are released with the paper.
+
+%=====================================================================================================
+\section{Results}\label{sec:results}
+
+\subsection{B1: one-dimensional restoration}
+Table~\ref{tab:b1} reports restoration of piecewise-smooth 1D signals, measured by the normalised mean squared error
+(NMSE $=\|\hat s-s\|^2/\|s\|^2$ in dB; lower is better). Under impulsive noise, a two-stage WOS-R chain with
+16 parameters and no multiplications reaches $-20.5$\,dB, better than the 3\,857-parameter medium CNN (CNN-M; S/M/L denote
+small/medium/large) ($-19.4$\,dB), the MLP
+($-19.9$\,dB) and the Transformer ($-18.5$\,dB). These three runs are, however, favourable for the single chain: over 20 independent trainings (B1, the convergence study and the restart study in the released code) it reaches $-18.7\pm1.3$\,dB (range $-20.7$ to $-16.9$), and keeping the best of 4 restarts selected on validation data gives $-19.6$\,dB, on a par with CNN-M. Banks are far less sensitive to initialisation ($-21.1\pm0.5$\,dB over 6 runs for $C{=}8$). The bank with $C{=}8$ chains (137 parameters, 8 multiplications per
+sample) reaches $-21.1$\,dB, 1.2\,dB behind the best model, CNN-L, which uses 161 times more parameters and 2\,744 times
+more multiplications. When the impulse amplitude doubles (out of distribution, OOD $\times2$), the ordinal models degrade least: WOS-R bank
+$C{=}8$ ($-17.8$\,dB) and the 1993 NEst bank ($-18.2$\,dB) overtake CNN-L ($-17.4$\,dB), while the Transformer breaks
+down ($+0.3$\,dB, against $+9.7$\,dB for the noisy input), as Proposition~\ref{prop:lip} would predict for a model that is
+not 1-Lipschitz. When the impulse \emph{rate} increases to 25\,\%, the CNNs extrapolate better ($-15.5$ vs $-12.4$\,dB):
+a WOS cascade designed for 10\,\% contamination has a fixed breakdown point (Prop.~\ref{prop:bp}).
+
+Under Gaussian noise, averaging is required and CNNs win in distribution ($-20.4$ vs $-18.2$\,dB); at twice the noise
+level the ranking reverses and WOS-R bank $C{=}8$ is the best model ($-12.7$\,dB vs $-11.6$\,dB for CNN-L). Ramp
+continuation improves the banks by 0.9--1.5\,dB over ramp-only training (ablation rows), consistently with
+Remark~\ref{rem:cont}. Keeping the ramp at test time ($\beta=1$) is 0.9--1.3\,dB \emph{worse} under impulses in
+distribution (0.3--1.4\,dB over all impulsive columns) but 1.0\,dB better for the Gaussian chain, because the $\beta=1$ ramp median is an L-filter (Prop.~\ref{prop:ramp}(iii)); we keep
+$\beta=0$ throughout for the guarantees.
+
+\input{tables/b1.tex}
+
+\subsection{B2: coverage}
+Table~\ref{tab:b2} probes coverage by system identification at high SNR (35\,dB), where approximate emulation is
+penalised. Each cell is the excess error of the deployed model over the noise floor of the true operator; Fig.~\ref{fig:b2}
+shows the same data as a map. Four facts stand out.
+
+(i) \emph{Exactness.} When the ramp-trained WOS-R finds the target, it finds it \emph{exactly}: 0.0\,dB on the 7-point
+median, the flat erosion, the weighted WOS and rank cascade \#1, for both seeds and both architectures. No network
+reaches the floor on any rank-type target: the MLP, CNN-M and Transformer stay 5.5--26.8\,dB above it, i.e.\ they
+approximate sorting but do not represent it, with 56--328 times more parameters.
+
+(ii) \emph{Optimisation, not representation, is the bottleneck inside the class.} The opening and rank cascades \#12 and
+\#5 are two-stage rank cascades, hence exactly representable by the WOS-R chain, yet ramp training does not find them
+(12--25\,dB). This agrees with the identification rate of 9/16 random cascades reported earlier. The 1993 NEst bank,
+whose parameters act on values, finds the opening (1.2\,dB) and cascade \#1 but misses the weighted WOS (22.4\,dB): the two
+parameterisations fail on different targets.
+
+(iii) \emph{Outside the class.} A flat WOS cascade is increasing and commutes with level shifts
+(Prop.~\ref{prop:lip}), so it cannot represent the signed high-pass, the point-wise square or the top-hat; the
+bank's affine mix could in principle express the top-hat as identity minus opening, but inherits the failure to find
+the opening. Moving averages are not selections either; the bank approaches them only coarsely (22.8\,dB). Networks
+represent these operators well (0.1--2.3\,dB for the linear ones).
+
+(iv) \emph{The deployed model, not the relaxed one.} At $\beta=1$ the same trained models are 17--31\,dB above the floor on
+every target; the exact selections appear only at $\beta=0$. Ramp training is a means to find the discrete model, not
+an approximation used at inference.
+
+\begin{figure}[t]\centering\includegraphics[width=0.68\linewidth]{figs/b2_coverage.pdf}
+\caption{Coverage map (excess NMSE above the floor, dB; green: represented, red: not represented).}\label{fig:b2}\end{figure}
+
+\input{tables/b2.tex}
+
+\subsection{B3: image impulse denoising}
+Table~\ref{tab:b3bsd68} reports blind impulse denoising on BSD68 (Set12 in Appendix~\ref{app:tables}). All learned models are
+trained on salt-and-pepper (SP) noise with random density in $[0.1,0.6]$; random-valued impulses (RVIN) are never seen
+in training. Three regimes appear.
+
+Quality is measured by the peak signal-to-noise ratio (PSNR, dB) and the structural similarity index (SSIM, 0--1).
+\emph{In distribution}, the best model is DnCNN-M, the 10-layer DnCNN (74\,593 parameters, 74\,304 multiplications per pixel). A
+\emph{switching} WOS-R, which applies a learned $5{\times}5$ two-stage WOS cascade only to pixels that are an extreme of
+their $3{\times}3$ neighbourhood, reaches 26.22\,dB at SP\,50\,\% (0.52\,dB behind DnCNN-M) with 52 parameters and no
+multiplications, has a higher SSIM (0.840 vs 0.761), matches the 17-layer DnCNN (26.20\,dB) and beats the window
+Transformer (24.92\,dB). The hand-designed adaptive median filter (AMF) remains a remarkably strong baseline for SP noise
+(26.02\,dB at 50\,\%, best SSIM at 70\,\%); the switching WOS-R matches it between 30\,\% and 50\,\% and is 1.6--1.8\,dB
+behind at the extremes of the density range.
+
+\emph{Out of distribution} (RVIN), every model that relies on detecting extreme values collapses: AMF, the switching
+WOS-R, the MLP, the DnCNNs and the Transformer all fall to 16--19.5\,dB at RVIN\,40\,\%. The plain (non-switching) WOS-R
+cascades keep 23.4--24.5\,dB, \emph{5.6--6.7\,dB above DnCNN-M}, because a selection with a bounded breakdown point does not
+care whether an outlier is at 0, 1 or anywhere in between. Figure~\ref{fig:qual} shows both effects.
+
+\emph{Gaussian noise} (Table~\ref{tab:b3g}) is outside the natural class of order statistics: on BSD68, WOS-R banks are 2.1--2.4\,dB
+behind DnCNN-M at the training level $\sigma=25$, but 4.0--4.6\,dB \emph{ahead} at $\sigma=50$ (Set12: 2.4--2.7 and 4.3--4.9\,dB), where every convolutional
+model over-fits its training noise level. In 2D, ramp continuation and ramp-only training give banks within 0.7\,dB of each
+other, without a consistent sign; the co-adaptation of Remark~\ref{rem:cont} matters at high SNR (B2) and in 1D (B1).
+
+DnCNN-17 without batch normalisation did not train in our CPU budget (17.06\,dB on Set12 at SP\,10\,\%); we report the
+original design with batch normalisation, which after 2\,000 steps is still below the 10-layer DnCNN-M. Our DnCNNs are
+therefore \emph{under-trained} relative to the published model \cite{zhang2017dncnn}, and the in-distribution gaps above
+are lower bounds on what a GPU-trained network achieves; the OOD collapses are not an artefact of under-training, since
+they affect every network regardless of its in-distribution quality.
+
+\begin{figure*}[t]\centering\includegraphics[width=\linewidth]{figs/qual.pdf}
+\caption{Set12 ``boat'' ($256{\times}256$ crop; PSNR of the full image). Top: SP 50\,\% (in distribution). Bottom: RVIN
+40\,\% (never seen in training). The switching WOS-R matches AMF and approaches DnCNN-M on SP; the plain (non-switching) WOS-R removes
+random-valued impulses, which every detection-based model and every network misses.}\label{fig:qual}\end{figure*}
+
+\input{tables/b3_gauss.tex}
+
+\input{tables/b3_bsd68.tex}
+
+\subsection{B4: CFAR detection}
+Table~\ref{tab:b4} compares detectors that estimate the local clutter level from the same 32 reference range cells around
+the cell under test (CUT), in the log domain, and are calibrated to the same false-alarm probability $P_{fa}=10^{-4}$;
+the figure of merit is the SNR needed for a detection probability $P_d=0.5$ (SNR$_{50}$). The learned WOS-R (32 repetition weights, a quantile and a scale: 34 parameters) is the best
+detector whenever interfering targets are present, at both texture correlations: with 8 interferers it gains 1.5\,dB
+($\rho=0$) and 1.7\,dB ($\rho=0.9$) over OS-CFAR. In homogeneous clutter the log-equivariant MLP (6\,337 parameters; ``log-equivariant'' means that scaling the clutter
+scales the threshold by the same factor, as CFAR requires) is
+0.3\,dB better, but it pays 4.3\,dB ($\rho=0$) and 3.3\,dB ($\rho=0.9$) with 8 interferers: a smooth function of the
+reference cells is contaminated by the interferers that an order statistic ignores up to its breakdown point. The
+Transformer, trained with the same Neyman--Pearson objective, is competitive without interferers and never reaches
+$P_d=0.5$ up to 30\,dB SNR when two or more interferers are present. The learned repetitions are interpretable
+(Fig.~\ref{fig:cfarw}): with uncorrelated texture they stay nearly uniform (an OS-CFAR with a learned rank), whereas
+with $\rho=0.9$ the cells adjacent to the guard cells receive 3--4 times the weight of distant cells, the positional
+boosting that a rank filter cannot express.
+
+\begin{figure}[t]\centering\includegraphics[width=0.62\linewidth]{figs/cfar_weights.pdf}
+\caption{Learned repetition weights of the CFAR WOS-R (2 seeds per texture correlation), normalised to their maximum.}\label{fig:cfarw}\end{figure}
+
+\input{tables/b4.tex}
+
+\subsection{B5: robust aggregation}
+Table~\ref{tab:b5} evaluates aggregation rules in federated training with 4 of 20 faulty nodes. No single-shot
+aggregator survives all attacks: burst faults that persist over consecutive steps already drive the mean and both trimmed
+means to chance accuracy (0.10), and the combined Gaussian-plus-burst fault does the same to the coordinate-wise (CW) median,
+the adaptive minimax OWA (AMO, an OWA whose weights are chosen online from a precomputed minimax library) and the learned sorted-MLP aggregator; only centred clipping keeps a little above chance (0.14--0.18).
+A learned MLP on sorted inputs standardised by the median and the median absolute deviation (MAD) (5\,569 parameters, trained on synthetic attack families) is no
+exception: silent data corruption (SDC: sporadic huge
+values from faulty hardware), which is not among its training families, drives it to 0.11, since nothing bounds the influence of an input
+that leaves the training range. What
+restores robustness is the \emph{cascade} structure of the thesis applied to the time$\times$node axes: a per-node
+temporal median over the last 3 submissions, followed by nearest-neighbour mixing and a final order-statistic aggregator.
+This ordinal cascade, with no trained parameters, has the best worst-case accuracy for $\alpha=1$ (0.753). Replacing its
+last stage by the learned MLP improves the heterogeneous worst case ($\alpha=0.1$: 0.615 vs 0.535, driven by IPM) at a
+small cost in the homogeneous case (0.740). The robustness comes from the rank cascade; the learned stage adds
+accuracy only once the cascade has bounded the influence of the faulty inputs.
+
+\input{tables/b5.tex}
+
+\subsection{Cost summary}
+Table~\ref{tab:cost} pairs the best WOS-R model with the best network on each task. Parameter savings are 161$\times$ (1D),
+186$\times$ (CFAR) and 1\,434$\times$ (images); multiplications drop from $6\cdot10^3$--$7\cdot10^4$ per sample to
+0--8, replaced by a few hundred comparisons. The accuracy cost in distribution is 0.5--1.2\,dB; out of distribution the
+sign flips. Wall-clock latency with generic PyTorch kernels does \emph{not} reflect these savings: sorting unfolded
+windows is memory-bound and the bank evaluates $C$ chains sequentially, so WOS-R is 1.1--4.5 times slower than CNNs of
+similar accuracy on a CPU. The operation counts, not this latency, are what a comparator implementation would exploit.
+
+\input{tables/cost.tex}
+
+\begin{figure*}[t]\centering\includegraphics[width=0.95\linewidth]{figs/pareto.pdf}
+\caption{Accuracy versus parameters (log scale). Red: order-statistic models; blue: networks. Vertical segments join
+in-distribution (o) and out-of-distribution (x) scores of the same model: short segments mean robust models.}\label{fig:pareto}\end{figure*}
+
+
+%=====================================================================================================
+\section{Discussion}\label{sec:disc}
+\paragraph{What the benchmark says.} Across the five problems the pattern is consistent. WOS-R is competitive in
+distribution with networks two to four orders of magnitude larger whenever the contamination is impulsive or
+heavy-tailed, and it is \emph{better} whenever the test distribution moves in a direction that a selection ignores:
+larger impulse amplitudes (B1), a different impulse type (B3, RVIN), or a higher Gaussian level (B1, B3); the same
+mechanism makes it the best detector in the presence of interfering targets (B4), which were present in training but
+contaminate any smooth function of the reference cells. These are the directions in which a 1-Lipschitz, bounded-influence model cannot be surprised, whereas
+networks trained by empirical risk minimisation have no such guarantee; the Transformer shows the most severe failures
+(B1, B4). Conversely, WOS-R loses when the task requires averaging in distribution (Gaussian noise, $\approx2$\,dB), when the
+contamination rate exceeds the design breakdown point (B1, $p=25\,\%$, $\approx3$\,dB), and, by construction, on the operators
+outside the class $\mathcal O$ (B2): signed linear filters, non-increasing operators such as the top-hat, and point-wise
+nonlinearities. Table~\ref{tab:decision} summarises the trade-off.
+
+\begin{table}[t]\centering\small
+\caption{When to use WOS-R (summary of B1--B5).}\label{tab:decision}
+\begin{tabular}{p{0.44\linewidth}p{0.47\linewidth}}\toprule
+WOS-R preferable & Network preferable\\\midrule
+Impulsive/heavy-tailed noise, unknown amplitude or type & Gaussian noise at the training level\\
+Interference-limited detection (CFAR) & Contamination rate above the design breakdown\\
+Byzantine/fault-robust aggregation (as a cascade front-end) & Signed linear, non-increasing or level-dependent operators\\
+$\le$\,200 parameters, $\le$\,8 multiplications, certified Lipschitz/breakdown & Highest in-distribution PSNR with GPU training\\
+\bottomrule\end{tabular}\end{table}
+
+\paragraph{Cascades as robust front-ends.} The federated experiment suggests the most practical use: a rank cascade
+first bounds the influence of corrupted inputs, and a learned stage then adds accuracy (B5: 0.535$\to$0.615 worst-case
+accuracy under heterogeneity). The same composition applies to images (a WOS-R front-end followed by a small CNN) and to
+radar (WOS-R CFAR followed by a learned classifier). Because a WOS cascade is increasing and translation invariant,
+any back-end that is 1-Lipschitz in $\ell_\infty$ preserves the end-to-end bound.
+
+\paragraph{The 1993 question, revisited.} The thesis \cite{delrio1993} concluded that parameters acting only on the
+\emph{index} of the selected sample (masks, ranks) cannot be adapted in a cascade, while parameters entering the
+\emph{value} can. Repetition weights are index parameters, and exact WOS stages indeed have zero gradients almost
+everywhere. The ramp resolves the dilemma by giving index parameters a value effect \emph{only during training}: the
+gradient flows through the interpolation between rank neighbours, and the interpolation is removed at deployment. In
+the identification task of the thesis, this raises the fraction of random cascades identified from 2--3 of 16 (NEst,
+value parameters) to 9 of 16 (paired Wilcoxon $p=4.6\cdot10^{-8}$ over 3 seeds).
+
+\paragraph{Hardware.} A deployed WOS-R stage needs a sorting network and a running sum of integer repetitions
+(Prop.~\ref{prop:thr}(iii)); a bank adds $C$ multiplications per sample. This maps to comparator-only logic on field-programmable gate arrays (FPGAs) and
+low-power digital signal processors (DSPs), the setting in which stack and weighted-median filters were originally implemented \cite{wendt1986stack,yin1996}.
+
+\section{Limitations}
+All training ran on a 2-core CPU. Image models use a single training seed and at most 3\,000 steps, so the CNN and
+Transformer baselines are under-trained relative to published GPU models; we mitigate this by reporting their failure
+modes only where they persist across model sizes. The CFAR study uses simulated K-distributed clutter with an AR(1)
+texture model, and the federated study a small CNN on Fashion-MNIST \cite{xiao2017fmnist} with 20 nodes. Latency is
+measured with generic PyTorch kernels (sorting by \texttt{torch.sort} on unfolded windows), which favour convolutions;
+the multiplication and comparison counts are the hardware-relevant quantities, and a sorting-network or comparator
+implementation remains to be built. Finally, the ramp gives exact gradients of a relaxed model but no guarantee of
+finding the global optimum: a two-stage chain represents the opening exactly, yet ramp training does not find it
+(Table~\ref{tab:b2}), and random cascades are identified in 9 of 16 cases.
+
+\section{Conclusion}
+We have shown that weighted order statistic cascades, a 40-year-old family of nonlinear filters, become trainable with a
+simple device---a ramp relaxation used only during training---and that the resulting models keep their guarantees at
+deployment. With tens to a few hundred parameters and almost no multiplications, they match or approach CNNs, MLPs
+and Transformers that are two to four orders of magnitude larger on impulsive restoration and detection, and order-statistic models are
+the most robust in every out-of-distribution test that changes the amplitude, the impulse type or the noise
+level---though not when the contamination rate exceeds their design breakdown point. Their limits are equally clear: they are not
+universal approximators and should be combined with linear or learned stages when the target is outside the class of
+increasing, translation-invariant operators. Learned switching detectors, hybrid WOS--linear layers and comparator
+hardware are natural next steps.
+
+\paragraph{Historical note.} The structures studied in \cite{delrio1993} (rank-order filters (ROF), LL-filters and the NEst structure
+$y=\sum_k|h_k|(z+b)_{(k)}$) were adapted sample by sample with LMS and implicit-function derivatives. Re-implemented
+with exact reverse-mode gradients, the 1993 NEst cascade reaches the noise floor on the thesis' own example in 7\,s
+instead of 20\,s, but identifies only 2--3 of 16 random cascades. Repetition weights with ramp training identify 9 of 16.
+
+\bibliographystyle{unsrtnat}
+\bibliography{refs}
+
+\appendix
+\section{Abbreviations}\label{app:abbr}
+\begin{center}\small
+\resizebox{\linewidth}{!}{\begin{tabular}{@{}ll@{\qquad}ll@{}}\toprule
+ALIE & ``a little is enough'' attack & MAD & median absolute deviation\\
+AMF & adaptive median filter & Med$_t$3 & per-node temporal median of the last 3 updates\\
+AMO & adaptive minimax OWA aggregator & MLP & multilayer perceptron\\
+BN & batch normalisation & MSE & mean squared error\\
+BSD68 & Berkeley segmentation dataset, 68 test images & NEst & 1993 rank structure $\sum_k|h_k|(z+b)_{(k)}$\\
+CClip & centred clipping & NMSE & normalised mean squared error\\
+CDF & cumulative distribution function & NNM & nearest-neighbour mixing\\
+CFAR & constant false-alarm rate & OOD & out of distribution\\
+CNN & convolutional neural network & OS-CFAR & order-statistic CFAR\\
+CUT & cell under test & OWA & ordered weighted average\\
+CW & coordinate-wise & $P_d$, $P_{fa}$ & detection / false-alarm probability\\
+DnCNN & denoising CNN \cite{zhang2017dncnn} & PSNR & peak signal-to-noise ratio\\
+DSP & digital signal processor & ROF & rank-order filter\\
+FFN & feed-forward network & RVIN & random-valued impulse noise\\
+FL & federated learning & SDC & silent data corruption\\
+FPGA & field-programmable gate array & SNR, SNR$_{50}$ & signal-to-noise ratio (at $P_d=0.5$)\\
+GO/SO-OS & greatest-of/smallest-of OS-CFAR & SP & salt-and-pepper noise\\
+IPM & inner-product manipulation attack & SSIM & structural similarity index\\
+K-distr. & compound-Gaussian sea-clutter model & STE & straight-through estimator\\
+LMS & least mean squares & SVM & support vector machine\\
+Mults/Comps & multiplications/comparisons per output & WOS & weighted order statistic\\
+ & & WOS-R & WOS trained with ramps, deployed exact\\
+\bottomrule\end{tabular}}\end{center}
+
+\section{Additional tables}\label{app:tables}
+\input{tables/b3_set12.tex}
+
+\section{Hyper-parameters}\label{app:hyper}
+\begin{itemize}
+\item \textbf{WOS-R}: repetition weights $w=\mathrm{softplus}(\alpha)$, initialised at $\approx1$; quantile $r=\sigma(\rho)$, initialised at $0.5$;
+  training at $\beta=1$ for chains and with $\beta$ annealed linearly from 1 to 0 over the first 70\,\% of the steps for banks,
+  deployment at $\beta=0$; Adam, $\eta=0.03$, cosine decay to $5\%$.
+  1D: windows of 7 samples, 2 stages per chain, banks of $C\in\{1,4,8\}$ chains with affine mix.
+  2D: $3{\times}3$ or $5{\times}5$ windows, 2 stages, $C\in\{1,4\}$.
+\item \textbf{1D baselines}: residual CNN-S (3 layers, 4 channels, kernel 5), CNN-M (4 layers, 16 channels, kernel 7),
+  CNN-L (5 layers, 32 channels, kernel 7); MLP on a 15-sample window ($15{\to}64{\to}64{\to}1$, residual);
+  Transformer (conv embedding to $d{=}16$, 2 encoder layers, 2 heads, feed-forward network (FFN) width 32, full attention, residual).
+  Adam, $\eta=2\cdot10^{-3}$, 3000 steps, batch 32 crops of 256 samples.
+\item \textbf{2D WOS-R}: chains of 2 stages on $3{\times}3$ or $5{\times}5$ windows; banks of 4 such chains; switching
+  variants apply the model only where the centre pixel equals the minimum or maximum of its $3{\times}3$ window (18
+  extra comparisons per pixel) and pass the input through elsewhere.
+\item \textbf{2D baselines}: DnCNN-type residual networks, $3{\times}3$ convolutions: S (6 layers, 16 channels) and
+  M (10 layers, 32 channels) without batch normalisation; DnCNN-17 (17 layers, 64 channels, batch normalisation, the
+  original design \cite{zhang2017dncnn}; the variant without batch normalisation did not train); MLP on a $5{\times}5$ neighbourhood; window Transformer (conv embedding to $d{=}32$,
+  2 blocks of $8{\times}8$ window attention, the second shifted, 4 heads, FFN 64). Adam, $\eta=10^{-3}$, 3000 steps
+  (2000 for DnCNN-17 and WOS-R), batches of 16 patches of $48{\times}48$ from the 400 BSD training images, with
+  random rotations and flips. A single training seed per model (CPU budget).
+\item \textbf{B2 coverage}: input i.i.d.\ $U[-5,5]$, 64 sequences of 2\,048 samples, additive uniform noise at 35\,dB
+  SNR; 3\,000 steps, batches of 16 crops of 256 samples; metric: NMSE of the deployed model minus the NMSE of the true
+  operator applied to the noisy input (the floor). Models: WOS-R chain ($2{\times}7$), WOS-R bank $C{=}4$, NEst bank
+  $C{=}4$, MLP (window 15), CNN-M, Transformer, as in B1.
+\item \textbf{B4 CFAR}: 32 reference cells (16 leading, 16 lagging), 2 guard cells per side; K-distributed clutter with
+  shape $\nu=2$, scene power uniform in $\pm20$\,dB, and Gaussian-copula AR(1) texture with coefficient $\rho\in\{0,0.9\}$
+  along range; detectors act on
+  $\log$ reference cells and output a log-threshold; training: 800 Adam steps of the Neyman--Pearson Lagrangian
+  (sigmoid detection surrogate, temperature 0.25, quadratic penalty on $\log P_{fa}$ above $10^{-4}$), with 0/2/4/8
+  interferers (20\,dB above the local clutter) and target SNR uniform in 10--20\,dB; evaluation: threshold scale
+  calibrated on $4\cdot10^5$ clutter-only cells, $P_d$ on $10^5$ cells per SNR on a 5\,dB grid from 5 to 30\,dB, SNR at
+  $P_d=0.5$ by linear interpolation. MLP: $32{\to}64{\to}64{\to}1$ on mean-removed logs; Transformer: $d{=}16$, 2 layers, 2 heads,
+  learned positions, mean pooling.
+\item \textbf{B5 aggregation}: Fashion-MNIST, small CNN, 20 nodes of which 4 faulty, Dirichlet label split
+  $\alpha\in\{1,0.1\}$, worker momentum 0.9, 300 steps, learning rate 0.08; attacks: sign-flip, ALIE \cite{baruch2019},
+  IPM \cite{xie2019ipm}, burst faults on 8 consecutive steps, SDC \cite{dixit2021sdc}, Gaussian plus burst. Sorted-MLP
+  aggregator: per coordinate, sort the $n$ values, standardise by median and MAD, MLP $20{\to}64{\to}64{\to}1$
+  (5\,569 parameters), trained on synthetic attack families to output the honest mean.
+\item \textbf{Classical}: median, adaptive median filter (Hwang--Haddad, maximum window 7) \cite{hwang1995}, OS-CFAR, GO-OS,
+  coordinate-wise median and trimmed mean.
+\end{itemize}
+\end{document}

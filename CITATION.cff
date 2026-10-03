@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Train with Ramps, Deploy with Ranks: Tiny, robust rank-order filters that compete with neural networks"
+type: software
+authors:
+  - family-names: "del Río"
+    given-names: "Juan Carlos"
+    affiliation: "Independent researcher, Madrid, Spain"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+version: "1.0.0"
+date-released: "2026-10-03"
+license: MIT
+repository-code: "https://github.com/GITHUB_USER/wosr-rank-filters"
+keywords:
+  - rank-order filters
+  - weighted order statistics
+  - median filter
+  - robust machine learning
+  - impulse noise
+  - CFAR
+  - Byzantine-robust aggregation
+  - multiplication-free models
+abstract: >-
+  Code, results and preprint for WOS-R: cascades and banks of weighted order statistic filters trained with a ramp
+  relaxation and deployed as exact rank filters, benchmarked against CNNs, MLPs and Transformers on 1D and image
+  impulse denoising, operator coverage, radar CFAR detection and fault-tolerant federated learning.

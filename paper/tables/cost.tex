@@ -1,0 +1,10 @@
+\begin{table*}[t]\centering\small
+\caption{Cost summary: best WOS-R vs best network per task. Mults/Comps per output sample or pixel; ms: CPU latency (1 thread; 4096 samples in 1D, $512{\times}512$ in 2D) with generic PyTorch kernels.}\label{tab:cost}
+\resizebox{\linewidth}{!}{\begin{tabular}{l|lrrrrr|lrrrr}\toprule
+Task & WOS-R model & Params & Mults & Comps & ms & Score & Network & Params & Mults & ms & Score\\\midrule
+B1 impulsive (NMSE dB) & WOS-R bank $C{=}8$ & 137 & 8 & 336 & 16.9 & -21.1 & CNN-L & 22\,081 & 21\,952 & 3.8 & -22.3\\
+B1 OOD amplitude (NMSE dB) & WOS-R bank $C{=}8$ & 137 & 8 & 336 & 16.9 & -17.8 & CNN-L & 22\,081 & 21\,952 & 3.8 & -17.4\\
+B3 BSD68 SP 50\% (PSNR) & Switching WOS-R $5{\times}5$ & 52 & 0 & 268 & 665.9 & 26.22 & DnCNN-M (10 layers, 32 ch) & 74\,593 & 74\,304 & 616.2 & 26.74\\
+B3 BSD68 RVIN 40\% (PSNR) & WOS-R $5{\times}5$, 2 stages & 52 & 0 & 250 & 722.0 & 24.46 & DnCNN-M (10 layers, 32 ch) & 74\,593 & 74\,304 & 616.2 & 17.74\\
+B4 CFAR, $\rho{=}0.9$, 8 interf.\ (SNR$_{50}$ dB) & WOS-R & 34 & 1 & 160 & -- & 17.09 & MLP & 6\,337 & 6\,208 & -- & 20.35\\
+\bottomrule\end{tabular}}\end{table*}

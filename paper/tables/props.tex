@@ -1,0 +1,9 @@
+\begin{table}[t]\centering\small
+\caption{Measured properties with non-uniform weights $w=(1,2,3,1,0.5,2,1)$, $r=0.4$, on $2\cdot10^4$ random windows of 7 samples. ``Jump in $r$'': largest output change when $r$ moves by $5\cdot10^{-3}$. Last two columns: largest output magnitude of the 5-point (ramp) median with uniform weights under $k$ impulses of $10^6$.}\label{tab:props}
+\resizebox{\linewidth}{!}{\begin{tabular}{lcccccc}\toprule
+Operator & Increasing & $\Psi(z{+}c){=}\Psi(z){+}c$ & Lipschitz $\ell_\infty$ & Jump in $r$ & 2 impulses & 3 impulses\\\midrule
+Exact WOS ($\beta=0$) & yes & yes & 1.00 & 3.46 & 3.9 & $1.0\cdot10^{6}$\\
+Ramp, $\beta=1$ & \textbf{no} & yes & 5.73 & 0.17 & $2.5\cdot10^{5}$ & $7.5\cdot10^{5}$\\
+Ramp, $\beta=0.5$ & \textbf{no} & yes & 3.88 & 1.78 & -- & --\\
+Ramp, integer version & \textbf{no} & yes & 9.14 & -- & 3.9 & $1.0\cdot10^{6}$\\
+\bottomrule\end{tabular}}\end{table}

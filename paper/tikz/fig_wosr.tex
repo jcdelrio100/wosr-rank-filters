@@ -1,0 +1,26 @@
+% Fig. 3 -- one WOS-R stage: repetitions, exact selection at deployment, ramp during training
+\begin{tikzpicture}[
+  cell/.style={draw, minimum width=7.5mm, minimum height=6mm, font=\small},
+  rep/.style={cell, fill=blue!12, draw=blue!60!black},
+  ramp/.style={cell, fill=red!12, draw=red!60!black},
+  pick/.style={very thick, draw=black},
+  lab/.style={font=\footnotesize, align=center},
+  arr/.style={-{Latex[length=2mm]}, thick}]
+  % (a) input with repetition weights
+  \node[lab, anchor=west] at (-0.4,1.05) {\textbf{(a)} window and learned repetitions $w_j$};
+  \node[cell] (p1) at (0,0) {0};   \node[lab] at (0,-0.6) {$w{=}1$};
+  \node[rep]  (p2) at (0.9,0) {0.5}; \node[lab] at (0.9,-0.6) {$w{=}3$};
+  \node[cell] (p3) at (1.8,0) {1};   \node[lab] at (1.8,-0.6) {$w{=}1$};
+  \draw[arr] (2.4,0) -- node[above, lab]{copy $w_j$\\times, sort} (4.7,0);
+  % (b) deployed list
+  \node[lab, anchor=west] at (5.3,1.05) {\textbf{(b)} deployed: exact replicas};
+  \foreach \v/\s [count=\k] in {0/cell,0.5/rep,0.5/rep,0.5/rep,1/cell}{\node[\s] (d\k) at (5.0+\k*0.8,0) {\v};}
+  \draw[decorate, decoration={brace, amplitude=4pt, mirror}] (5.45,-0.4) -- (9.35,-0.4)
+     node[midway, below=4pt, lab]{pick position $\lceil rW\rceil$ \;($W=\sum_j w_j=5$)};
+  % (c) training list
+  \node[lab, anchor=west] at (5.3,-2.05) {\textbf{(c)} training: replicas spread as a ramp};
+  \foreach \v/\s [count=\k] in {0/cell,0.25/ramp,0.5/ramp,0.75/ramp,1/cell}{\node[\s] (t\k) at (5.0+\k*0.8,-3.0) {\v};}
+  \node[lab, text width=5.0cm, align=left, anchor=west] at (11.4,-1.2) {The 3 copies of 0.5 are spread between the mid-points to its rank neighbours (0.25 and 0.75).\\[2pt]
+     The output then moves \emph{continuously} with $w$ and $r$ (Fig.~\ref{fig:rampcurve}), so gradient descent works.
+     At deployment the ramp is removed: the model is an exact rank filter again.};
+\end{tikzpicture}

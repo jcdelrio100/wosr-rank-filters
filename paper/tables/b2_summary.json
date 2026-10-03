@@ -1,0 +1,213 @@
+{
+ "gap": {
+  "Mediana 7": {
+   "WOS-R cadena": 0.0,
+   "WOS-R banco C=4": 0.0031173229217529297,
+   "WOS-R banco C=4 [solo rampa]": 19.797945618629456,
+   "NEst banco C=4": 0.14007925987243652,
+   "MLP": 16.77532434463501,
+   "CNN-M": 18.93005073070526,
+   "Transformer": 26.17472305893898
+  },
+  "Erosi\u00f3n plana 5": {
+   "WOS-R cadena": 0.0,
+   "WOS-R banco C=4": 0.004551410675048828,
+   "WOS-R banco C=4 [solo rampa]": 20.569443106651306,
+   "NEst banco C=4": 3.276522159576416,
+   "MLP": 6.525380611419678,
+   "CNN-M": 9.498183727264404,
+   "Transformer": 5.49013614654541
+  },
+  "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)": {
+   "WOS-R cadena": 19.70962166786194,
+   "WOS-R banco C=4": 14.5473051071167,
+   "WOS-R banco C=4 [solo rampa]": 23.599778413772583,
+   "NEst banco C=4": 1.2491333484649658,
+   "MLP": 12.976137399673462,
+   "CNN-M": 12.554879188537598,
+   "Transformer": 24.646478295326233
+  },
+  "WOS ponderado (1,3,0,2,4,1,2)": {
+   "WOS-R cadena": 0.0,
+   "WOS-R banco C=4": 0.001697540283203125,
+   "WOS-R banco C=4 [solo rampa]": 20.211934447288513,
+   "NEst banco C=4": 22.395590245723724,
+   "MLP": 10.318626165390015,
+   "CNN-M": 16.706159710884094,
+   "Transformer": 25.489095449447632
+  },
+  "Cascada E2 t1": {
+   "WOS-R cadena": 0.0,
+   "WOS-R banco C=4": 0.003644227981567383,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": 0.4602503776550293,
+   "MLP": 18.09567630290985,
+   "CNN-M": 19.86989438533783,
+   "Transformer": 26.828133165836334
+  },
+  "Cascada E2 t12": {
+   "WOS-R cadena": 19.816482067108154,
+   "WOS-R banco C=4": 12.288841009140015,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": 11.317205429077148,
+   "MLP": 16.043224334716797,
+   "CNN-M": 16.225568056106567,
+   "Transformer": 24.578089118003845
+  },
+  "Cascada E2 t5": {
+   "WOS-R cadena": 25.195050537586212,
+   "WOS-R banco C=4": 21.402191519737244,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": 20.448397397994995,
+   "MLP": 17.70403265953064,
+   "CNN-M": 19.735228419303894,
+   "Transformer": 26.12291991710663
+  },
+  "Media m\u00f3vil 5": {
+   "WOS-R cadena": 32.629154920578,
+   "WOS-R banco C=4": 22.80955195426941,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": 0.7684552669525146,
+   "MLP": 0.817943811416626,
+   "CNN-M": 1.0981488227844238,
+   "Transformer": 2.2959446907043457
+  },
+  "Paso alto [-1,2,-1]/2": {
+   "WOS-R cadena": 30.264340043067932,
+   "WOS-R banco C=4": 24.409236907958984,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": 0.825190544128418,
+   "MLP": 0.13319969177246094,
+   "CNN-M": 0.19876956939697266,
+   "Transformer": 0.1759791374206543
+  },
+  "Top-hat x \u2212 apertura": {
+   "WOS-R cadena": 31.226114183664322,
+   "WOS-R banco C=4": 20.094028115272522,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": 2.0398950576782227,
+   "MLP": 11.154811382293701,
+   "CNN-M": 7.852461338043213,
+   "Transformer": 23.399221301078796
+  },
+  "No linealidad puntual x\u00b2/5": {
+   "WOS-R cadena": 29.629787430167198,
+   "WOS-R banco C=4": 26.192322969436646,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": 20.63899517059326,
+   "MLP": 1.5226399898529053,
+   "CNN-M": 4.015552997589111,
+   "Transformer": 0.7406127452850342
+  }
+ },
+ "gap_ramp_deploy": {
+  "Mediana 7": {
+   "WOS-R cadena": 19.43660259246826,
+   "WOS-R banco C=4": 22.533062994480133,
+   "WOS-R banco C=4 [solo rampa]": 18.726163506507874,
+   "NEst banco C=4": null,
+   "MLP": null,
+   "CNN-M": null,
+   "Transformer": null
+  },
+  "Erosi\u00f3n plana 5": {
+   "WOS-R cadena": 18.457958698272705,
+   "WOS-R banco C=4": 19.199085235595703,
+   "WOS-R banco C=4 [solo rampa]": 14.855620861053467,
+   "NEst banco C=4": null,
+   "MLP": null,
+   "CNN-M": null,
+   "Transformer": null
+  },
+  "Apertura 5 (erosi\u00f3n\u2192dilataci\u00f3n)": {
+   "WOS-R cadena": 23.046751618385315,
+   "WOS-R banco C=4": 22.042327523231506,
+   "WOS-R banco C=4 [solo rampa]": 19.08670723438263,
+   "NEst banco C=4": null,
+   "MLP": null,
+   "CNN-M": null,
+   "Transformer": null
+  },
+  "WOS ponderado (1,3,0,2,4,1,2)": {
+   "WOS-R cadena": 21.641618609428406,
+   "WOS-R banco C=4": 22.87247598171234,
+   "WOS-R banco C=4 [solo rampa]": 20.662027597427368,
+   "NEst banco C=4": null,
+   "MLP": null,
+   "CNN-M": null,
+   "Transformer": null
+  },
+  "Cascada E2 t1": {
+   "WOS-R cadena": 19.927948713302612,
+   "WOS-R banco C=4": 20.627741813659668,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": null,
+   "MLP": null,
+   "CNN-M": null,
+   "Transformer": null
+  },
+  "Cascada E2 t12": {
+   "WOS-R cadena": 17.04759955406189,
+   "WOS-R banco C=4": 19.035102128982544,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": null,
+   "MLP": null,
+   "CNN-M": null,
+   "Transformer": null
+  },
+  "Cascada E2 t5": {
+   "WOS-R cadena": 24.13171648979187,
+   "WOS-R banco C=4": 23.12423527240753,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": null,
+   "MLP": null,
+   "CNN-M": null,
+   "Transformer": null
+  },
+  "Media m\u00f3vil 5": {
+   "WOS-R cadena": 29.233278036117554,
+   "WOS-R banco C=4": 21.600158214569092,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": null,
+   "MLP": null,
+   "CNN-M": null,
+   "Transformer": null
+  },
+  "Paso alto [-1,2,-1]/2": {
+   "WOS-R cadena": 30.73590189218521,
+   "WOS-R banco C=4": 25.14404147863388,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": null,
+   "MLP": null,
+   "CNN-M": null,
+   "Transformer": null
+  },
+  "Top-hat x \u2212 apertura": {
+   "WOS-R cadena": 29.779785573482513,
+   "WOS-R banco C=4": 23.830515146255493,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": null,
+   "MLP": null,
+   "CNN-M": null,
+   "Transformer": null
+  },
+  "No linealidad puntual x\u00b2/5": {
+   "WOS-R cadena": 29.098184257745743,
+   "WOS-R banco C=4": 27.26771906018257,
+   "WOS-R banco C=4 [solo rampa]": null,
+   "NEst banco C=4": null,
+   "MLP": null,
+   "CNN-M": null,
+   "Transformer": null
+  }
+ },
+ "params": {
+  "WOS-R cadena": 16,
+  "WOS-R banco C=4": 69,
+  "WOS-R banco C=4 [solo rampa]": 69,
+  "NEst banco C=4": 117,
+  "MLP": 5249,
+  "CNN-M": 3857,
+  "Transformer": 4561
+ }
+}

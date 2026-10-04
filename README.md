@@ -2,7 +2,7 @@
 
 **Tiny, robust rank-order filters that compete with neural networks.**
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.SWDOI.svg)](https://doi.org/10.5281/zenodo.SWDOI)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23144884.svg)](https://doi.org/10.5281/zenodo.23144884)
 
 Rank-order filters (median, erosion, dilation, weighted medians) need no multiplications, tolerate a known number of
 corrupted samples and are 1-Lipschitz, but they are hard to train because selecting "the k-th largest value" has zero
@@ -29,8 +29,7 @@ and operators that need subtraction or squaring.
 
 ```
 paper/
-  wosr_zenodo.pdf / .tex       accessible preprint (main document)
-  wosr_technical.pdf / .tex    detailed technical version (propositions, full protocol)
+  wosr_zenodo.pdf / .tex       the preprint
   refs.bib, tikz/, figs/, tables/
   make_tables.py               regenerates every table from code/bench/*.json
   make_bench_figs.py           benchmark dashboards (accuracy, residual error, convergence, latency, parameters)
@@ -71,7 +70,7 @@ python b6_convergence.py && python b7_structure.py && python b8_restarts.py && p
 cd ../../paper
 python make_tables.py b1 b2 b3 b4 b5 cost fit
 python make_bench_figs.py 1d img acc struct
-latexmk -pdf wosr_zenodo.tex wosr_technical.tex
+latexmk -pdf wosr_zenodo.tex
 ```
 
 All experiments in the paper ran on a 2-core CPU with PyTorch 2.x; no GPU is needed. The tables can be regenerated from
@@ -97,9 +96,9 @@ bank = WOSBank(C=4, stages=2, dim=1, k=7, anneal=2100)   # banks: ramp annealed 
 See `CITATION.cff`, or:
 
 > J. C. del Río, *Train with Ramps, Deploy with Ranks: Tiny, robust rank-order filters that compete with neural
-> networks*, preprint, Zenodo, 2026. doi:10.5281/zenodo.PPDOI
+> networks*, preprint, Zenodo, 2026. doi:10.5281/zenodo.23144648
 >
-> Code and results: doi:10.5281/zenodo.SWDOI
+> Code and results: doi:10.5281/zenodo.23144884
 
 ## Licence
 

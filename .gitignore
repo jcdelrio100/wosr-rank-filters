@@ -17,3 +17,5 @@ __pycache__/
 *.fls
 *.out
 *.synctex.gz
+.DS_Store
+*.tmp

@@ -10,8 +10,8 @@ authors:
 version: "1.0.0"
 date-released: "2026-10-03"
 license: MIT
-repository-code: "https://github.com/GITHUB_USER/wosr-rank-filters"
-doi: "10.5281/zenodo.SWDOI"
+repository-code: "https://github.com/jcdelrio100/wosr-rank-filters"
+doi: "10.5281/zenodo.23144884"
 preferred-citation:
   type: article
   title: "Train with Ramps, Deploy with Ranks: Tiny, robust rank-order filters that compete with neural networks"
@@ -21,7 +21,7 @@ preferred-citation:
   year: 2026
   publisher:
     name: "Zenodo"
-  doi: "10.5281/zenodo.PPDOI"
+  doi: "10.5281/zenodo.23144648"
   notes: "Preprint"
 keywords:
   - rank-order filters

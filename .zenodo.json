@@ -3,13 +3,25 @@
   "upload_type": "software",
   "description": "<p>Code, raw results and preprint for <b>WOS-R</b>: cascades and banks of weighted order statistic (rank-order) filters trained with a ramp relaxation and deployed as exact rank filters. Benchmarks against CNNs, MLPs and Transformers on 1D and image impulse denoising, operator coverage, radar CFAR detection and fault-tolerant federated learning, including accuracy, residual error, convergence time, latency and parameter counts. Continuation of the author's 1993 UPC thesis on adaptive cascades of order filters.</p>",
   "creators": [
-    {"name": "del Río, Juan Carlos", "affiliation": "Independent researcher, Madrid, Spain"}
+    {
+      "name": "del Río, Juan Carlos",
+      "affiliation": "Independent researcher, Madrid, Spain",
+      "orcid": "0009-0009-2908-4168"
+    }
   ],
   "license": "MIT",
   "access_right": "open",
-  "keywords": ["rank-order filters", "weighted order statistics", "median filter", "robust machine learning",
-               "impulse noise", "CFAR", "Byzantine-robust aggregation", "multiplication-free models",
-               "differentiable sorting"],
+  "keywords": [
+    "rank-order filters",
+    "weighted order statistics",
+    "median filter",
+    "robust machine learning",
+    "impulse noise",
+    "CFAR",
+    "Byzantine-robust aggregation",
+    "multiplication-free models",
+    "differentiable sorting"
+  ],
   "language": "eng",
   "version": "1.0.0"
 }

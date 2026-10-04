@@ -6,7 +6,7 @@ authors:
   - family-names: "del Río"
     given-names: "Juan Carlos"
     affiliation: "Independent researcher, Madrid, Spain"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
+    orcid: "https://orcid.org/0009-0009-2908-4168"
 version: "1.0.0"
 date-released: "2026-10-03"
 license: MIT
